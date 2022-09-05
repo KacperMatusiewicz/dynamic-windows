@@ -3,5 +3,36 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "dynamic-windows-core": {
+      "projectType": "library",
+      "root": "projects/dynamic-windows-core",
+      "sourceRoot": "projects/dynamic-windows-core/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/dynamic-windows-core/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/dynamic-windows-core/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/dynamic-windows-core/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/dynamic-windows-core/src/test.ts",
+            "tsConfig": "projects/dynamic-windows-core/tsconfig.spec.json",
+            "karmaConfig": "projects/dynamic-windows-core/karma.conf.js"
+          }
+        }
+      }
+    }
   }
 }

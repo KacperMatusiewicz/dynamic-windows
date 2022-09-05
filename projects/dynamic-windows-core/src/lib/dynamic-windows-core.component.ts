@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {DynamicWindowsCoreService} from "./dynamic-windows-core.service";
+import {DynamicWindow} from "./dynamic-window";
 
 @Component({
   selector: 'lib-dynamic-windows-core',
@@ -10,11 +12,15 @@ import { Component, OnInit } from '@angular/core';
   styles: [
   ]
 })
-export class DynamicWindowsCoreComponent implements OnInit {
+export class DynamicWindowsCoreComponent extends DynamicWindow implements OnInit {
 
-  constructor() { }
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void {
   }
 
+  open() {
+  }
 }

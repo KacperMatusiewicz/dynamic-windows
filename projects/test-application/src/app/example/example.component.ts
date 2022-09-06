@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DynamicWindow} from "../../../../dynamic-windows-core/src/lib/dynamic-window";
 
 @Component({
@@ -13,6 +13,16 @@ export class ExampleComponent extends DynamicWindow implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  override resolveCloseWindowAction() {
+    if (window.confirm("Are u siur?")){
+
+      if (this.id != null) {
+        this.w.terminate(this.id)
+      }
+
+    }
   }
 
 }

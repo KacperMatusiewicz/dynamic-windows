@@ -1,16 +1,22 @@
-import { NgModule } from '@angular/core';
-import { DynamicWindowsCoreComponent } from './dynamic-windows-core.component';
+import {Injector, NgModule} from '@angular/core';
+import {WindowStoreService} from "./window-store.service";
+import {SimpleWindowComponent} from './simple-window/simple-window.component';
 
-
+export let WindowInjector: Injector;
 
 @NgModule({
   declarations: [
-    DynamicWindowsCoreComponent
+    SimpleWindowComponent
   ],
-  imports: [
-  ],
-  exports: [
-    DynamicWindowsCoreComponent
+  imports: [],
+  exports: [],
+  providers: [
+    WindowStoreService
   ]
 })
-export class DynamicWindowsCoreModule { }
+export class DynamicWindowsCoreModule {
+
+  constructor(private injector: Injector) {
+    WindowInjector = this.injector;
+  }
+}

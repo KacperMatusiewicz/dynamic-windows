@@ -1,37 +1,22 @@
 import {ComponentRef, Injectable, Type, ViewContainerRef} from '@angular/core';
-import {TaskbarService} from "./taskbar.service";
 import {DynamicWindow} from "./dynamic-window";
-import {DynamicWindowsCoreComponent} from "./dynamic-windows-core.component";
+import {SimpleWindowComponent} from "./simple-window/simple-window.component";
 
 @Injectable({
   providedIn: 'root'
 })
 export class WindowStoreService<T extends DynamicWindow> {
-  //do zastanowienia:
-  taskbarService: TaskbarService | null;
-
-  setTaskbar(taskbarService: TaskbarService) {
-    if(taskbarService === null) {
-      this.useTaskbar = true;
-    } else {
-      this.useTaskbar = false;
-    }
-    this.taskbarService = taskbarService;
-  }
-
-
 
   currentZIndex: number;
   idCounter: number;
 
   windowContainerRef : ViewContainerRef | undefined;
-  windowList:  Map<Number, HTMLElement>;
+  windowList:  Map<Number, ComponentRef<any>>;
 
-  private useTaskbar: boolean = false;
+
   constructor() {
     this.windowList = new Map();
     this.currentZIndex = 0;
-    this.taskbarService = null;
     this.idCounter = 0;
   }
 
@@ -39,17 +24,47 @@ export class WindowStoreService<T extends DynamicWindow> {
     this.windowContainerRef = windowContainerRef;
   }
 
-  createWindow(cls: Type<T>) : void {
+  createWindow(cls: Type<T>) : ComponentRef<any> {
     let componentRef: ComponentRef<any>;
     if(this.windowContainerRef !== undefined){
       componentRef = this.windowContainerRef?.createComponent(cls);
-      this.windowList.set(this.idCounter++, componentRef.location.nativeElement);
+      componentRef.instance.setId(this.idCounter);
+      this.windowList.set(this.idCounter++, componentRef);
       console.log("no elo");
+      return componentRef;
     }
+    throw new DOMException();
   }
 
-  closeWindow(id: number): void {
+  createWindowFromHtmlElement(element: HTMLElement) : ComponentRef<any> {
+    let componentRef: ComponentRef<any>;
+    if(this.windowContainerRef !== undefined){
+      componentRef = this.windowContainerRef?.createComponent(SimpleWindowComponent);
+      componentRef.instance.addHtmlElement(element);
+      componentRef.instance.setId(this.idCounter);
+      this.windowList.set(this.idCounter++, componentRef);
+      return componentRef;
+    }
+    throw new DOMException();
+  }
 
+
+  closeWindow(id: number): void {
+    if (this.windowList.has(id)){
+      // @ts-ignore
+      const componentRef: ComponentRef<any> = this.windowList.get(id);
+      componentRef.instance.resolveCloseWindowAction();
+    }
+
+  }
+
+  terminate(id: number) : void {
+    if (this.windowList.has(id)) {
+      // @ts-ignore
+      const componentRef: ComponentRef<any> = this.windowList.get(id);
+      componentRef.location.nativeElement.remove();
+      this.windowList.delete(id);
+    }
   }
 }
 

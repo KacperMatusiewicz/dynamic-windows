@@ -1,9 +1,9 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { WindowStoreService } from './window-store.service';
+import {WindowStoreService} from './window-store.service';
 
 describe('WindowStoreService', () => {
-  let service: WindowStoreService;
+  let service: WindowStoreService<any>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

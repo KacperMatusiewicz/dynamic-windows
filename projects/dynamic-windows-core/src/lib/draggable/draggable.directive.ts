@@ -3,7 +3,7 @@ import {fromEvent, Subscription, takeUntil} from "rxjs";
 import {DOCUMENT} from "@angular/common";
 
 @Directive({
-  selector: '[draggable]'
+  selector: '[dw-draggable]'
 })
 export class DraggableDirective implements AfterViewInit, OnDestroy{
 
@@ -18,12 +18,12 @@ export class DraggableDirective implements AfterViewInit, OnDestroy{
     @Inject(DOCUMENT) private document: any
   ) {
     this.element = this.elementReference.nativeElement as HTMLElement;
-    this.draggableSpaceElements = this.elementReference.nativeElement.getElementsByClassName('draggable-space');
+    this.draggableSpaceElements = this.elementReference.nativeElement.getElementsByClassName('dw-draggable-space');
   }
 
   ngAfterViewInit(): void {
     this.elementHandle = this.draggableSpaceElements.item(0) as HTMLElement;
-    this.nonDraggableElements = this.elementHandle.getElementsByClassName("non-draggable-space")
+    this.nonDraggableElements = this.elementHandle.getElementsByClassName("dw-non-draggable-space")
     this.element.style.position = "absolute";
     this.initDrag();
   }
@@ -55,7 +55,7 @@ export class DraggableDirective implements AfterViewInit, OnDestroy{
         return;
       }
 
-      this.element.classList.add('free-dragging');
+      this.element.classList.add('dw-free-dragging');
       dragSub = drag$.subscribe((event: MouseEvent) => {
         event.preventDefault();
 
@@ -75,7 +75,7 @@ export class DraggableDirective implements AfterViewInit, OnDestroy{
       initialX = currentX;
       initialY = currentY;
 
-      this.element.classList.remove('free-dragging');
+      this.element.classList.remove('dw-free-dragging');
       if (dragSub) {
         dragSub.unsubscribe();
       }

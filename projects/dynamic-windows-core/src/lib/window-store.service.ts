@@ -13,7 +13,6 @@ export class WindowStoreService<T extends DynamicWindow> {
   windowContainerRef : ViewContainerRef | undefined;
   windowList:  Map<Number, ComponentRef<any>>;
 
-
   constructor() {
     this.windowList = new Map();
     this.currentZIndex = 0;
@@ -22,6 +21,7 @@ export class WindowStoreService<T extends DynamicWindow> {
 
   setWindowContainerRef(windowContainerRef: ViewContainerRef) {
     this.windowContainerRef = windowContainerRef;
+    this.windowContainerRef.element.nativeElement.style = "position: relative;"
   }
 
   createWindow(cls: Type<T>) : ComponentRef<any> {
@@ -30,7 +30,6 @@ export class WindowStoreService<T extends DynamicWindow> {
       componentRef = this.windowContainerRef?.createComponent(cls);
       componentRef.instance.setId(this.idCounter);
       this.windowList.set(this.idCounter++, componentRef);
-      console.log("no elo");
       return componentRef;
     }
     throw new DOMException();

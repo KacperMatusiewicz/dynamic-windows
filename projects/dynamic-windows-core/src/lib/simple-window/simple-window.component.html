@@ -1,2 +1,11 @@
-<button (click)="closeWindow()">Close</button>
-<div ngModel #container id="container"></div>
+<div windowframe >
+  <div titlebar>
+    <div close_button>
+      <button (click)="closeWindow()">Close</button>
+    </div>
+
+  </div>
+  <div content>
+    <div ngModel #container id="container"></div>
+  </div>
+</div>

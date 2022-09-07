@@ -20,6 +20,7 @@ export class AppComponent implements AfterViewInit{
 
   ngAfterViewInit(): void {
     this.windowsStore.setWindowContainerRef(this.vcr);
+   // this.vcr.element.nativeElement.style = "position: relative;"
   }
 
   create() {
@@ -29,7 +30,9 @@ export class AppComponent implements AfterViewInit{
   close() {
     this.windowsStore.closeWindow(this.componentRef?.instance.id);
   }
-
+  logViewChild(){
+    this.componentRef?.instance.logViewChild();
+  }
   createMultipleWindowsFromHTMLElement() {
     let e = document.createElement("ul");
     let e2 = document.createElement("li");

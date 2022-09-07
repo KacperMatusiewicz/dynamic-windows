@@ -22,7 +22,7 @@ npm install dynamic-windows-core
 
 First you have to specify what dom element should act as a "**display**"
 
-```angular2html
+```html
 <!-- app.component.html -->
 <div ngModel #vcr></div>
 ```
@@ -44,7 +44,7 @@ export class AppComponent implements AfterViewInit {
 ```
 
 ### Create a window
-```angular2html
+```html
 <!-- window.component.html -->
 <div style="background-color: blueviolet; height: 100px; width: 100px;">
   This is a Window!
@@ -76,7 +76,7 @@ this.windowStore.createWindow(WindowComponent);
 The simplest way to close a window is to call **closeWindow()** method 
 which is defined in DynamicWindow class.
 So for example we'll add a button calling this method.
-```angular2html
+```html
 <!-- window.component.html -->
   <button (click)="this.closeWindow()">Close me!</button>
 
@@ -175,4 +175,44 @@ sequenceDiagram
 Note, that you can create multiple windows from the same HTML element, 
 because while creating a window, the HTML element is cloned into it. 
 
+## Window structure
+
+### Component structure
+
+```ts
+@Component(...)
+export class WindowComponent extends DynamicWindow {
+
+  constructor() {
+    super();
+  }
+}
+```
+
+### Template structure
+
+```html
+<div windowframe>
+  ...
+</div>
+```
+
+## Resizable window
+
+```html
+<div windowframe resizable>
+  ...
+</div>
+```
+## Draggable window
+
+```html
+<div windowframe draggable>
+  ...
+  <div draggable-space>
+    <div non-draggable-space></div>
+  </div>
+  ...
+</div>
+```
 ## Saving windows state to local storage

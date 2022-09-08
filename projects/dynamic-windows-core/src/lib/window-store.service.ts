@@ -65,6 +65,10 @@ export class WindowStoreService<T extends DynamicWindow> {
       this.windowList.delete(id);
     }
   }
+
+  public getFocusNumber() : number {
+    return ++this.currentZIndex;
+  }
 }
 
 

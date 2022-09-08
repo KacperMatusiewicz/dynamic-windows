@@ -62,14 +62,12 @@ export class DraggableDirective implements AfterViewInit, OnDestroy{
     for(let i = 0; i < multipleDragStart.length; i++) {
       let dragStartSub = multipleDragStart[i].subscribe(
         (event: MouseEvent) => {
-          this.element.style.cursor = "move";
           initialX = event.clientX - this.parseToNumber(this.element.style.left);
           initialY = event.clientY - this.parseToNumber(this.element.style.top);
-
-
           if(this.checkIfOnNonDraggableElement(event)){
             return;
           }
+          this.element.style.cursor = "move";
 
           this.element.classList.add('dw-free-dragging');
           dragSub = drag$.subscribe((event: MouseEvent) => {

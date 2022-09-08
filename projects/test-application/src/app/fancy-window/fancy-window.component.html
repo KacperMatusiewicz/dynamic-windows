@@ -1,12 +1,12 @@
-<div dw-draggable dw-resizable class="window-frame">
+<div dw-draggable dw-resizable dw-focusable class="window-frame">
   <div class="window">
 
-    <ul  class="window-buttons">
+    <ul dw-non-draggable-space="recursive" class="window-buttons">
       <li class="window-button button-minimize">
         <div class="button-minimize-lines"></div>
       </li>
       <li class="window-button button-close" (click)="closeWindow()">
-        <div dw-non-draggable-space class="button-close-lines"></div>
+        <div class="button-close-lines"></div>
       </li>
     </ul>
 

@@ -7,6 +7,7 @@ import {CommonModule} from "@angular/common";
 import {DraggableSpaceDirective} from './draggable/draggable-space.directive';
 import {NonDraggableSpaceDirective} from './draggable/non-draggable-space.directive';
 import {WindowFrameDirective} from './windowframe/windowframe.directive';
+import { FocusableDirective } from './focusable/focusable.directive';
 
 export let WindowInjector: Injector;
 
@@ -17,7 +18,8 @@ export let WindowInjector: Injector;
     ResizableDirective,
     DraggableSpaceDirective,
     NonDraggableSpaceDirective,
-    WindowFrameDirective
+    WindowFrameDirective,
+    FocusableDirective
   ],
   imports: [
     CommonModule
@@ -28,7 +30,8 @@ export let WindowInjector: Injector;
     ResizableDirective,
     DraggableSpaceDirective,
     NonDraggableSpaceDirective,
-    WindowFrameDirective
+    WindowFrameDirective,
+    FocusableDirective
   ],
   providers: [
     WindowStoreService

@@ -1,0 +1,138 @@
+<div dw-draggable dw-resizable class="window-frame">
+  <div dw-draggable-space class="window">
+
+    <ul class="window-buttons">
+      <li class="window-button button-minimize">
+        <div dw-non-draggable-space class="button-minimize-lines"></div>
+      </li>
+      <li class="window-button button-close" (click)="closeWindow()">
+        <div dw-non-draggable-space class="button-close-lines"></div>
+      </li>
+    </ul>
+
+    <div dw-non-draggable-space="deep" class="playlist">
+      <div class="bar">
+        <div class="playlist-details">
+          <div class="playlist-label">Playlist</div>
+          <div class="playlist-remaining">47 minutes remaining</div>
+        </div>
+        <div class="playlist-buttons">
+          <div class="playlist-search">
+            <div class="search-icon"></div>
+          </div>
+          <div class="playlist-select">
+            <div class="check-icon"></div>
+          </div>
+        </div>
+      </div>
+      <ul class="list-items">
+        <li class="list-item">
+          <div class="list-album-cover"></div>
+          <div class="list-song-details">
+            <div class="list-song-details-name">Reveal Your Shape, O Formless One</div>
+            <div class="list-song-details-artist">Xanthochroid</div>
+          </div>
+        </li>
+        <li class="list-item">
+          <div class="list-album-cover"></div>
+          <div class="list-song-details">
+            <div class="list-song-details-name">Of Aching Empty Pain</div>
+            <div class="list-song-details-artist">Xanthochroid</div>
+          </div>
+          <div class="now-playing-indicator">
+            <div class="indicator-arrow"></div>
+          </div>
+        </li>
+        <li class="list-item">
+          <div class="list-album-cover"></div>
+          <div class="list-song-details">
+            <div class="list-song-details-name">Of Gods Bereft of Grace</div>
+            <div class="list-song-details-artist">Xanthochroid</div>
+          </div>
+        </li>
+        <li class="list-item">
+          <div class="list-album-cover"></div>
+          <div class="list-song-details">
+            <div class="list-song-details-name">Of Strength and the Lust for Power</div>
+            <div class="list-song-details-artist">Xanthochroid</div>
+          </div>
+        </li>
+        <li class="list-item">
+          <div class="list-album-cover"></div>
+          <div class="list-song-details">
+            <div class="list-song-details-name">Walk With Me, O Winged Mother</div>
+            <div class="list-song-details-artist">Xanthochroid</div>
+          </div>
+        </li>
+        <li class="list-item">
+          <div class="list-album-cover"></div>
+          <div class="list-song-details">
+            <div class="list-song-details-name">Through Caverns Old and Yawning</div>
+            <div class="list-song-details-artist">Xanthochroid</div>
+          </div>
+        </li>
+        <li class="list-item">
+          <div class="list-album-cover"></div>
+          <div class="list-song-details">
+            <div class="list-song-details-name">Through Chains That Drag Us Downward</div>
+            <div class="list-song-details-artist">Xanthochroid</div>
+          </div>
+        </li>
+        <li class="list-item">
+          <div class="list-album-cover"></div>
+          <div class="list-song-details">
+            <div class="list-song-details-name">Toward Truth and Reconciliation</div>
+            <div class="list-song-details-artist">Xanthochroid</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="player">
+      <div class="cover-art"></div>
+      <div class="song-details">
+        <div class="song-name">Of Aching Empty Pain</div>
+        <div class="artist-name">Xanthochroid</div>
+        <div class="album-name">Of Erthe and Axen Act II</div>
+      </div>
+      <div class="controls">
+        <canvas ngModel #audioSpectrum id="audio-spectrum" width="256px" height="48px" class="audio-spectrum"></canvas>
+        <div class="song-timestamps">
+          <div class="time-now">6:09</div>
+          <div class="time-to-end">-1:57</div>
+        </div>
+        <div class="player-controls">
+          <div class="player-prev">
+            <div class="player-arrow"></div>
+          </div>
+          <div class="player-play-pause">
+            <div class="pause-vis"></div>
+          </div>
+          <div class="player-next">
+            <div class="player-arrow"></div>
+          </div>
+        </div>
+        <div class="volume-controls">
+          <div class="volume-down-speaker"></div>
+          <div class="volume-bar-bg">
+            <div class="volume-bar-state"></div>
+          </div>
+          <div class="volume-up-speaker">
+            <div class="volume-up-speaker-more-lines"></div>
+          </div>
+        </div>
+        <div class="play-options">
+          <div class="play-options-box">
+            <div class="pane-toggle"></div>
+            <div class="shuffle-toggle"></div>
+          </div>
+          <div class="play-options-box">
+            <div class="repeat-toggle"></div>
+            <div class="menu-toggle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

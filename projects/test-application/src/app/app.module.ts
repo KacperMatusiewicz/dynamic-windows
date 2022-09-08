@@ -4,11 +4,13 @@ import {DynamicWindowsCoreModule} from "../../../dynamic-windows-core/src/lib/dy
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ExampleComponent} from './example/example.component';
+import { FancyWindowComponent } from './fancy-window/fancy-window.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ExampleComponent
+    ExampleComponent,
+    FancyWindowComponent
   ],
   imports: [
     BrowserModule,

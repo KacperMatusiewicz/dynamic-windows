@@ -288,6 +288,7 @@ export class ResizableDirective implements AfterViewInit{
   private createAnchor(className: string, isTop: boolean, topOrBottom: number, isLeft:boolean, leftOrRight: number, width: string, height: string, cursor: string): HTMLElement {
     let tmp = document.createElement("div");
     tmp.classList.add("dw-resize-anchor");
+    tmp.classList.add("dw-non-draggable-space");
     tmp.classList.add(className);
     tmp.style.position = "absolute";
 

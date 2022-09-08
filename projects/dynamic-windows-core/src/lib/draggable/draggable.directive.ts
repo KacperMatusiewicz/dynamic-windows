@@ -22,7 +22,11 @@ export class DraggableDirective implements AfterViewInit, OnDestroy{
   }
 
   ngAfterViewInit(): void {
-    this.elementHandle = this.draggableSpaceElements.item(0) as HTMLElement;
+    if(this.draggableSpaceElements.length == 0) {
+      this.elementHandle= this.element;
+    } else {
+      this.elementHandle = this.draggableSpaceElements.item(0) as HTMLElement;
+    }
     this.nonDraggableElements = this.elementHandle.getElementsByClassName("dw-non-draggable-space")
     this.element.style.position = "absolute";
     this.initDrag();
@@ -33,7 +37,16 @@ export class DraggableDirective implements AfterViewInit, OnDestroy{
   }
 
   private initDrag() {
-    const dragStart$ = fromEvent<MouseEvent>(this.elementHandle as HTMLElement, "mousedown");
+    let multipleDragStart = [];
+    if(this.draggableSpaceElements.length > 0) {
+      for(let i = 0; i < this.draggableSpaceElements.length; i++) {
+        const dragStart = fromEvent<MouseEvent>(this.draggableSpaceElements.item(i) as HTMLElement, "mousedown");
+        multipleDragStart.push(dragStart);
+      }
+    } else {
+      const dragStart = fromEvent<MouseEvent>(this.elementHandle as HTMLElement, "mousedown");
+      multipleDragStart.push(dragStart);
+    }
     const dragEnd$ = fromEvent<MouseEvent>(this.document, "mouseup");
     const drag$ = fromEvent<MouseEvent>(this.document, "mousemove").pipe(
       takeUntil(dragEnd$)
@@ -46,43 +59,48 @@ export class DraggableDirective implements AfterViewInit, OnDestroy{
 
     let dragSub: Subscription;
 
-    const dragStartSub = dragStart$.subscribe((event: MouseEvent) => {
-      initialX = event.clientX - this.parseToNumber(this.element.style.left);
-      initialY = event.clientY - this.parseToNumber(this.element.style.top);
+    for(let i = 0; i < multipleDragStart.length; i++) {
+      let dragStartSub = multipleDragStart[i].subscribe(
+        (event: MouseEvent) => {
+          this.element.style.cursor = "move";
+          initialX = event.clientX - this.parseToNumber(this.element.style.left);
+          initialY = event.clientY - this.parseToNumber(this.element.style.top);
 
 
-      if(this.checkIfOnNonDraggableElement(event)){
-        return;
-      }
+          if(this.checkIfOnNonDraggableElement(event)){
+            return;
+          }
 
-      this.element.classList.add('dw-free-dragging');
-      dragSub = drag$.subscribe((event: MouseEvent) => {
-        event.preventDefault();
+          this.element.classList.add('dw-free-dragging');
+          dragSub = drag$.subscribe((event: MouseEvent) => {
+            event.preventDefault();
 
-        currentX = event.clientX - initialX;
-        currentY = event.clientY - initialY;
+            currentX = event.clientX - initialX;
+            currentY = event.clientY - initialY;
 
-        this.element.style.left = currentX + "px";
-        this.element.style.top  = currentY + "px";
+            this.element.style.left = currentX + "px";
+            this.element.style.top  = currentY + "px";
 
-        if (currentY < 0){
-          this.element.style.top  = 0 + "px";
+            if (currentY < 0){
+              this.element.style.top  = 0 + "px";
+            }
+          });
         }
-      });
-    });
+      );
+      this.subscriptions.push.apply(this.subscriptions, [dragStartSub])
+    }
 
     const dragEndSub = dragEnd$.subscribe((event: MouseEvent) => {
       initialX = currentX;
       initialY = currentY;
-
       this.element.classList.remove('dw-free-dragging');
+      this.element.style.cursor = "";
       if (dragSub) {
         dragSub.unsubscribe();
       }
     });
 
     this.subscriptions.push.apply(this.subscriptions, [
-      dragStartSub,
       dragSub!,
       dragEndSub,
     ]);

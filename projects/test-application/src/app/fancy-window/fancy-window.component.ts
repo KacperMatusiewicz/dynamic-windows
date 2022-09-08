@@ -11,7 +11,7 @@ export class FancyWindowComponent extends DynamicWindow implements OnInit, After
   @ViewChild("audioSpectrum")
   canvas!: ElementRef<any>;
 
-  constructor() {
+  constructor(private el: ElementRef) {
     super();
   }
 
@@ -20,10 +20,6 @@ export class FancyWindowComponent extends DynamicWindow implements OnInit, After
 
   ngAfterViewInit(): void {
     this.drawSpectrum();
-  }
-
-  doStuff(){
-    console.log("Press")
   }
 
   private drawSpectrum() {
@@ -47,5 +43,12 @@ export class FancyWindowComponent extends DynamicWindow implements OnInit, After
       }
 
     }
+  }
+
+
+  override resolveCloseWindowAction() {
+    this.el.nativeElement.getElementsByClassName("window-frame").item(0).style.transition = "transform 0.5s ease-in 0s";
+    this.el.nativeElement.getElementsByClassName("window-frame").item(0).style.transform = "rotate(360deg) scale(0)";
+    setTimeout(() => super.resolveCloseWindowAction(), 500);
   }
 }

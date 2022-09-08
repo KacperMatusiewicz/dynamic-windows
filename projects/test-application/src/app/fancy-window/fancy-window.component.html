@@ -1,16 +1,16 @@
 <div dw-draggable dw-resizable class="window-frame">
-  <div dw-draggable-space class="window">
+  <div class="window">
 
-    <ul class="window-buttons">
+    <ul  class="window-buttons">
       <li class="window-button button-minimize">
-        <div dw-non-draggable-space class="button-minimize-lines"></div>
+        <div class="button-minimize-lines"></div>
       </li>
       <li class="window-button button-close" (click)="closeWindow()">
         <div dw-non-draggable-space class="button-close-lines"></div>
       </li>
     </ul>
 
-    <div dw-non-draggable-space="deep" class="playlist">
+    <div dw-non-draggable-space="recursive" class="playlist">
       <div class="bar">
         <div class="playlist-details">
           <div class="playlist-label">Playlist</div>

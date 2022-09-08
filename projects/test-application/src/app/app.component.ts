@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ComponentRef, ViewChild, ViewContainerRef} fro
 import {WindowStoreService} from "../../../dynamic-windows-core/src/lib/window-store.service";
 import {ExampleComponent} from "./example/example.component";
 import {DynamicWindow} from "../../../dynamic-windows-core/src/lib/dynamic-window";
+import {FancyWindowComponent} from "./fancy-window/fancy-window.component";
 
 @Component({
   selector: 'app-root',
@@ -20,11 +21,14 @@ export class AppComponent implements AfterViewInit{
 
   ngAfterViewInit(): void {
     this.windowsStore.setWindowContainerRef(this.vcr);
-   // this.vcr.element.nativeElement.style = "position: relative;"
   }
 
   create() {
      this.componentRef = this.windowsStore.createWindow(ExampleComponent);
+  }
+
+  createFancy() {
+    this.componentRef = this.windowsStore.createWindow(FancyWindowComponent);
   }
 
   close() {

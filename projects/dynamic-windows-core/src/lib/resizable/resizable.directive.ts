@@ -1,4 +1,4 @@
-import {AfterViewInit, Directive, ElementRef, Inject} from '@angular/core';
+import {AfterViewInit, Directive, ElementRef, Inject, Input} from '@angular/core';
 import {DOCUMENT} from "@angular/common";
 import {fromEvent, Subscription, takeUntil} from "rxjs";
 
@@ -6,6 +6,10 @@ import {fromEvent, Subscription, takeUntil} from "rxjs";
   selector: '[dw-resizable]'
 })
 export class ResizableDirective implements AfterViewInit{
+
+  @Input("anchor-size")
+  anchorSize: string = "10";
+
   element: HTMLElement;
 
   topHandle: HTMLElement | undefined;
@@ -30,7 +34,7 @@ export class ResizableDirective implements AfterViewInit{
   }
 
   ngAfterViewInit(): void {
-    let barW = 10;
+    let barW = parseInt(this.anchorSize);
     this.topHandle = this.createAnchor("dw-resize-anchor-t", true, -(barW/2),true, barW/2, `calc(100% - ${barW}px)`, `${barW}px`, "ns-resize");
     this.leftHandle = this.createAnchor("dw-resize-anchor-l",true, barW/2,true, -(barW/2), `${barW}px`, `calc(100% - ${barW}px)`, "ew-resize");
     this.rightHandle = this.createAnchor("dw-resize-anchor-r",true, (barW/2),false, -(barW/2), `${barW}px`, `calc(100% - ${barW}px)`, "ew-resize");
@@ -288,6 +292,7 @@ export class ResizableDirective implements AfterViewInit{
   private createAnchor(className: string, isTop: boolean, topOrBottom: number, isLeft:boolean, leftOrRight: number, width: string, height: string, cursor: string): HTMLElement {
     let tmp = document.createElement("div");
     tmp.classList.add("dw-resize-anchor");
+    tmp.classList.add("dw-non-draggable-space");
     tmp.classList.add(className);
     tmp.style.position = "absolute";
 

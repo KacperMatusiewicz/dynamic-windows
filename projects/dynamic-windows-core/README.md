@@ -178,7 +178,11 @@ because while creating a window, the HTML element is cloned into it.
 ## Window structure
 
 ### Component structure
+To create a custom window you should extend `DynamicWindow` base class.
+Then you can style your window in **.html** and **.css** files.
 
+`DynamicWindow` class gives you access to WindowService instance, stores your window id, 
+and provides basic functionality to manage your window from within the component.
 ```ts
 @Component(...)
 export class WindowComponent extends DynamicWindow {
@@ -191,28 +195,86 @@ export class WindowComponent extends DynamicWindow {
 
 ### Template structure
 
+Although `dw-windowframe` attribute is optional, if you'd like your window to be resizable,
+draggable and focusable out of the box we encourage you to use this attribute: 
+
 ```html
-<div windowframe>
+<div dw-windowframe>
   ...
 </div>
 ```
+Attribute `dw-windowrfame` contains other attributes with default settings:
+
+#### `dw-windowframe` = `dw-resizable` + `dw-focusable` + `dw-draggable`
 
 ## Resizable window
+By default, windows cannot be resized, to enable resizing add a `dw-resizable` attribute.
 
 ```html
-<div windowframe resizable>
+<div dw-resizable>
   ...
 </div>
 ```
-## Draggable window
+This will add to your HTML element set of invisible html elements, which we'll call anchors:
+# obrazek z anchorami
+
+As you can see, there are eight of them, four edge anchors, and four corner anchors.
+
+### Setting custom anchor size
+If you want to customize the size of the resizing anchors, you can specify `anchor-size` property
+by passing a number in px. (the default anchor size is 10px)
 
 ```html
-<div windowframe draggable>
+<div dw-resizable anchor-size="50">
   ...
-  <div draggable-space>
-    <div non-draggable-space></div>
+</div>
+```
+
+## Draggable window
+To enable the window to be moved around, add a `dw-draggable` directive to it.
+
+```html
+<div dw-draggable>
+  ...
+</div>
+```
+
+### Defining custom draggable space
+You can exclude certain parts of your window from being a draggable space, 
+dw-draggable affects all child elements, 
+but you can prevent them from becoming a hook for dragging using `non-draggable-space` attribute,
+for example you might want elements like `<textarea>` to respond to `mousedown` event in a canonical way.
+
+Furthermore, you can set `recursive` value on a `non-draggable-space` property to affect all child nodes.
+```html
+<div dw-draggable>
+  ...
+  <div dw-draggable-space>
+    ...
+    <textarea dw-non-draggable-space ></textarea>
+    ...
+    <div dw-non-draggable-space="recursive">
+      <div></div> <-- This div will be also treated as non-draggable space.
+    </div>
+    ...
+    <div dw-non-draggable-space >
+      <div></div> <-- Note, that you can still drag the window
+                      using this element as a hook.
+    </div>
+    ...
   </div>
   ...
 </div>
 ```
+
+## Focusable window
+The window defined as `dw-focusable` will be pulled above other windows when clicked.
+This directive should be applied on the window frame:
+
+```html
+<div dw-focusable>
+  ...
+</div>
+```
+
 ## Saving windows state to local storage

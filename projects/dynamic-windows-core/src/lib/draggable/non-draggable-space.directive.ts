@@ -13,10 +13,27 @@ export class NonDraggableSpaceDirective implements AfterViewInit{
 
   ngAfterViewInit(): void {
     this.setDefaultPropagationStrategyValue();
-    if(this.propagationStrategy === "recursive") {
-      this.setNonDraggableRecursive(this.elementRef.nativeElement);
-    } else {
-      this.elementRef.nativeElement.classList.add("dw-non-draggable-space");
+
+    switch (this.propagationStrategy){
+      case "recursive": {
+        this.setNonDraggableRecursive(this.elementRef.nativeElement);
+        break;
+      }
+      case "recursive-child": {
+        this.setNonDraggableRecursiveChild(this.elementRef.nativeElement);
+        break;
+      }
+      default: {
+        this.elementRef.nativeElement.classList.add("dw-non-draggable-space");
+      }
+    }
+  }
+
+  private setNonDraggableRecursiveChild(el: HTMLElement){
+    for (let i=0; i<el.children.length; i++){
+      let child = el.children.item(i) as HTMLElement;
+      if(child !== null)
+        this.setNonDraggableRecursive(child);
     }
   }
 

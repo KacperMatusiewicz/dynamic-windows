@@ -242,10 +242,10 @@ To enable the window to be moved around, add a `dw-draggable` directive to it.
 ### Defining custom draggable space
 You can exclude certain parts of your window from being a draggable space, 
 dw-draggable affects all child elements, 
-but you can prevent them from becoming a hook for dragging using `non-draggable-space` attribute,
+but you can prevent them from becoming a hook for dragging using `dw-non-draggable-space` attribute,
 for example you might want elements like `<textarea>` to respond to `mousedown` event in a canonical way.
 
-Furthermore, you can set `recursive` value on a `non-draggable-space` property to affect all child nodes.
+Furthermore, you can set `recursive` value on a `dw-non-draggable-space` property to affect all child nodes.
 ```html
 <div dw-draggable>
   ...
@@ -265,6 +265,25 @@ Furthermore, you can set `recursive` value on a `non-draggable-space` property t
   </div>
   ...
 </div>
+```
+In some cases you might want to set `dw-non-draggable-space` recursively on all child nodes of the specified element,
+excluding the element itself, this can be achieved by setting `recursive-child` value on `dw-non-draggable-space`.
+```html
+...
+<ul dw-non-draggable-space="recursive-child"> <-- This element still is draggable,
+  <li class="first-button">                       but all child elements are NOT.
+    <button>Hey!</button>
+  </li>
+  <li class="second-button">
+    <button>Listen!</button>
+  </li>
+  <li class="more-buttons">
+    <button>Button 1</button>
+    <button>Button 2</button>
+    <button>Button 3</button>
+  </li>
+</ul>
+...
 ```
 
 ## Focusable window

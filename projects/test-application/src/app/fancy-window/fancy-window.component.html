@@ -1,7 +1,7 @@
 <div dw-windowframe class="window-frame">
   <div class="window">
 
-    <ul dw-non-draggable-space="recursive" class="window-buttons">
+    <ul dw-non-draggable-space="recursive-child" class="window-buttons">
       <li class="window-button button-minimize">
         <div class="button-minimize-lines"></div>
       </li>
@@ -10,7 +10,7 @@
       </li>
     </ul>
 
-    <div dw-non-draggable-space="recursive" class="playlist">
+    <div class="playlist">
       <div class="bar">
         <div class="playlist-details">
           <div class="playlist-label">Playlist</div>
@@ -25,7 +25,7 @@
           </div>
         </div>
       </div>
-      <ul class="list-items">
+      <ul dw-non-draggable-space="recursive-child" class="list-items">
         <li class="list-item">
           <div class="list-album-cover"></div>
           <div class="list-song-details">
@@ -101,7 +101,7 @@
           <div class="time-now">6:09</div>
           <div class="time-to-end">-1:57</div>
         </div>
-        <div class="player-controls">
+        <div dw-non-draggable-space="recursive-child" class="player-controls">
           <div class="player-prev">
             <div class="player-arrow"></div>
           </div>

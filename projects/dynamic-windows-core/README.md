@@ -203,7 +203,7 @@ draggable and focusable out of the box we encourage you to use this attribute:
   ...
 </div>
 ```
-Attribute `dw-windowrfame` contains other attributes with default settings:
+Attribute `dw-windowframe` contains other attributes with default settings:
 
 #### `dw-windowframe` = `dw-resizable` + `dw-focusable` + `dw-draggable`
 

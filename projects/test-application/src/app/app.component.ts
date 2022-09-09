@@ -14,8 +14,8 @@ export class AppComponent implements AfterViewInit{
 
   @ViewChild("vcr", {read: ViewContainerRef})
   vcr!: ViewContainerRef;
-  componentRef: ComponentRef<any> | undefined | null;
-  constructor(private windowsStore: WindowStoreService<DynamicWindow>) {
+  componentRef!: ComponentRef<ExampleComponent>;
+  constructor(private windowsStore: WindowStoreService) {
 
   }
 
@@ -24,7 +24,7 @@ export class AppComponent implements AfterViewInit{
   }
 
   create() {
-     this.componentRef = this.windowsStore.createWindow(ExampleComponent);
+    this.componentRef = this.windowsStore.createWindow(ExampleComponent);
   }
 
   createFancy() {
@@ -32,11 +32,10 @@ export class AppComponent implements AfterViewInit{
   }
 
   close() {
-    this.windowsStore.closeWindow(this.componentRef?.instance.id);
+
+    this.windowsStore.closeWindow(this.componentRef.instance.id);
   }
-  logViewChild(){
-    this.componentRef?.instance.logViewChild();
-  }
+
   createMultipleWindowsFromHTMLElement() {
     let e = document.createElement("ul");
     let e2 = document.createElement("li");

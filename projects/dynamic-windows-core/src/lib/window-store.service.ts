@@ -1,11 +1,12 @@
 import {ComponentRef, Injectable, Type, ViewContainerRef} from '@angular/core';
 import {DynamicWindow} from "./dynamic-window";
 import {SimpleWindowComponent} from "./simple-window/simple-window.component";
+import {TypeofExpr} from "@angular/compiler";
 
 @Injectable({
   providedIn: 'root'
 })
-export class WindowStoreService<T extends DynamicWindow> {
+export class WindowStoreService {
 
   currentZIndex: number;
   idCounter: number;
@@ -21,12 +22,12 @@ export class WindowStoreService<T extends DynamicWindow> {
 
   setWindowContainerRef(windowContainerRef: ViewContainerRef) {
     this.windowContainerRef = windowContainerRef;
-    this.windowContainerRef.element.nativeElement.style = "position: relative;"
+    this.windowContainerRef.element.nativeElement.style.position = "relative";
   }
 
-  createWindow(cls: Type<T>) : ComponentRef<any> {
-    let componentRef: ComponentRef<any>;
-    if(this.windowContainerRef !== undefined){
+   createWindow<T extends DynamicWindow>(cls: Type<T>): ComponentRef<T> {
+    let componentRef: ComponentRef<T>;
+    if(this.windowContainerRef !== undefined) {
       componentRef = this.windowContainerRef?.createComponent(cls);
       componentRef.instance.setId(this.idCounter);
       this.windowList.set(this.idCounter++, componentRef);

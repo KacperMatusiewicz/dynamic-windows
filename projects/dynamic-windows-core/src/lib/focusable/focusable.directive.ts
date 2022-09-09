@@ -2,45 +2,28 @@ import {AfterViewInit, Directive, ElementRef, OnDestroy, ViewContainerRef} from 
 import {WindowStoreService} from "../window-store.service";
 import {DynamicWindow} from "../dynamic-window";
 import {fromEvent, Subscription} from "rxjs";
+import {Focusable} from "./focusable";
 
 @Directive({
   selector: '[dw-focusable]'
 })
-export class FocusableDirective implements AfterViewInit, OnDestroy{
-
-  id: number | undefined;
-  element: HTMLElement;
-  subscriptions: Subscription[] = [];
+export class FocusableDirective extends Focusable implements AfterViewInit, OnDestroy{
 
   constructor(
-    private elementRef: ElementRef,
-    private host: ViewContainerRef,
-    private windowsService: WindowStoreService<DynamicWindow>
+    private elementReference: ElementRef,
+    private viewContainerRef: ViewContainerRef,
+    private winService: WindowStoreService
   ) {
-    elementRef.nativeElement.classList.add("dw-focusable");
-    this.element = elementRef.nativeElement;
+    super(elementReference, viewContainerRef, winService);
   }
 
   ngAfterViewInit(): void {
-    // @ts-ignore
-    this.id = this.host._hostLView[8].id;
-    this.element.style.zIndex = `${this.windowsService.getFocusNumber()}`;
-    this.initFocusable();
-  }
-
-  private initFocusable() {
-    if (this.id != null) {
-      let id: number = this.id;
-      const focus = fromEvent<MouseEvent>(this.element as HTMLElement, "mousedown");
-      const focusSub = focus.subscribe((event: MouseEvent) => {
-        this.element.style.zIndex = `${this.windowsService.getFocusNumber()}`;
-      });
-      this.subscriptions.push.apply(this.subscriptions,[focusSub]);
-    }
+    super.focusableAfterViewInit();
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((s) => s.unsubscribe());
+    super.focusableOnDestroy();
   }
+
 
 }

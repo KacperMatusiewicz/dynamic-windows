@@ -19,7 +19,7 @@ export let WindowInjector: Injector;
     DraggableSpaceDirective,
     NonDraggableSpaceDirective,
     WindowFrameDirective,
-    FocusableDirective
+    FocusableDirective,
   ],
   imports: [
     CommonModule

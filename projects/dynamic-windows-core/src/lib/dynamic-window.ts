@@ -3,11 +3,11 @@ import {WindowInjector} from "./dynamic-windows-core.module";
 
 export class DynamicWindow {
 
-  id: number | undefined;
-  w: WindowStoreService<any>;
+  id: number = -1;
+  w: WindowStoreService;
 
   constructor() {
-   this.w = WindowInjector.get(WindowStoreService<any>);
+   this.w = WindowInjector.get(WindowStoreService);
   }
 
   public setId(id: number): void {

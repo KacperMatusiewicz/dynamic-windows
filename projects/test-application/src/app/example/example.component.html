@@ -1,12 +1,16 @@
-<div class="window" dw-draggable dw-resizable>
-  <div class="titlebar" dw-draggable-space style="display: flex; justify-content: center; align-items: center; flex-direction: row; gap: 10px;">
-    <div dw-non-draggable-space style="color: #000; width: 20px; height: 20px; background-color: red">X</div>
-    <div style="color: #000; width: 20px; height: 20px; background-color: blue">-</div>
-    <div style="color: #000; width: 20px; height: 20px; background-color: green;" (click)="closeWindow()">-</div>
+<div dw-windowframe class="window">
+  <div class="wrapper">
+    <div dw-draggable-space class="titlebar">
+      <div class="window-title">My example text editor</div>
+      <ul dw-non-draggable-space="recursive-child" class="window-buttons">
+        <li class="window-button button-minimize"></li>
+        <li class="window-button button-maximize"></li>
+        <li (click)="resolveCloseWindowAction()" class="window-button button-close"></li>
+      </ul>
 
-  </div>
-  <div #content>
-    <button (click)="closeWindow()">Close</button>
-    <div ngModel #container id="container"></div>
+    </div>
+    <div class="content">
+      <textarea>Hello this is my simple text editor!</textarea>
+    </div>
   </div>
 </div>

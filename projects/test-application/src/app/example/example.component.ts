@@ -16,7 +16,7 @@ export class ExampleComponent extends DynamicWindow implements OnInit {
   }
 
   override resolveCloseWindowAction() {
-    if (window.confirm("Are u siur?")){
+    if (window.confirm("Are you sure?")){
 
       if (this.id != null) {
         this.w.terminate(this.id)

@@ -107,7 +107,7 @@ li.list-item{
 div.list-album-cover{
   width: 48px;
   height: 48px;
-  background-image: url("projects/test-application/src/assets/cover.jpg");
+  background-image: url("projects/test-application/src/assets/song-covers/cover1.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -343,7 +343,7 @@ div.cover-art{
   height: 194px;
   border-radius: 12px;
   box-shadow: 0px 0px 24px -10px black;
-  background-image: url("projects/test-application/src/assets/cover.jpg");
+  background-image: url("projects/test-application/src/assets/song-covers/cover1.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

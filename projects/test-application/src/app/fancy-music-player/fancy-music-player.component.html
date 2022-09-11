@@ -1,0 +1,90 @@
+<div dw-windowframe #wrapper class="window">
+
+  <ul dw-non-draggable-space="recursive-child" class="window-buttons">
+    <li class="window-button button-minimize"></li>
+    <li class="window-button button-close" (click)="closeWindow()"></li>
+  </ul>
+
+  <div class="wrapper">
+
+    <div #playlist class="playlist">
+      <div class="playlist-bar">
+        <div class="playlist-details">
+          <div class="playlist-text">Playlist</div>
+          <div class="playlist-time-remaining">2 hours 56 minutes remaining</div>
+        </div>
+        <div class="playlist-bar-buttons">
+
+        </div>
+      </div>
+      <div class="playlist-list">
+        <ul dw-non-draggable-space="recursive-child" class="playlist-list-items">
+          <li *ngFor="let s of playlistSongs" class="playlist-list-item" (click)="setAsPlaying(s)">
+            <div [ngStyle]="s.getFormattedUrl()" class="song-cover-art"></div>
+            <div class="song-info-small">
+              <div class="song-name-small">{{s.name}}</div>
+              <div class="artist-name-small">{{s.artist}}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div #player class="player">
+      <div class="player-box">
+        <div #now_playing_art class="album-art-big"></div>
+        <div class="song-details-big">
+          <div class="song-title">{{now_playing_name}}</div>
+          <div class="song-artist">{{now_playing_artist}}</div>
+          <div class="song-album">{{now_playing_album}}</div>
+        </div>
+        <div class="audio-spectrum-big">
+          <canvas #spectrum class="audio-spectrum" width="254px" height="48px"></canvas>
+          <div class="song-time">
+            <div class="song-time-now">2:55</div>
+            <div class="song-time-remaining">-3:05</div>
+          </div>
+        </div>
+        <div class="audio-controls-big">
+          <ul dw-non-draggable-space="recursive-child" class="song-control-buttons">
+            <li class="song-control-button">
+              <div class="song-control-arrow prev-track"></div>
+            </li>
+            <li class="song-control-button play-button" (click)="changePlayState()">
+              <div #pause_button style="display: none" class="pause-icon"></div>
+              <div #play_button  style="display: flex" class="play-icon" ></div>
+            </li>
+            <li class="song-control-button">
+              <div class="song-control-arrow next-track"></div>
+            </li>
+          </ul>
+          <div class="volume-controls">
+            <div class="volume-indicator-box">
+              <div class="volume-icon"></div>
+              <div class="volume-bar-icon"></div>
+            </div>
+            <div class="volume-bar-container">
+              <input dw-non-draggable-space min="0" max="100" value="50" step="1" type="range" class="volume-bar"/>
+            </div>
+            <div class="volume-indicator-box">
+              <div class="volume-icon"></div>
+              <div class="volume-bar-icon"></div>
+              <div class="volume-bar-icon b2"></div>
+            </div>
+          </div>
+          <div class="extra-control-buttons">
+            <div class="control-box">
+              <div class="control-button"></div>
+              <div class="control-button"></div>
+            </div>
+            <div class="control-box">
+              <div class="control-button"></div>
+              <div class="control-button"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

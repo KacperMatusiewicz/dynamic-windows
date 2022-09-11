@@ -5,12 +5,14 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ExampleComponent} from './example/example.component';
 import { FancyWindowComponent } from './fancy-window/fancy-window.component';
+import { FancyMusicPlayerComponent } from './fancy-music-player/fancy-music-player.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ExampleComponent,
-    FancyWindowComponent
+    FancyWindowComponent,
+    FancyMusicPlayerComponent
   ],
   imports: [
     BrowserModule,

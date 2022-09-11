@@ -3,6 +3,8 @@ import {WindowStoreService} from "../../../dynamic-windows-core/src/lib/window-s
 import {ExampleComponent} from "./example/example.component";
 import {DynamicWindow} from "../../../dynamic-windows-core/src/lib/dynamic-window";
 import {FancyWindowComponent} from "./fancy-window/fancy-window.component";
+import {FancyMusicPlayerComponent} from "./fancy-music-player/fancy-music-player.component";
+import {window} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -28,7 +30,7 @@ export class AppComponent implements AfterViewInit{
   }
 
   createFancy() {
-    this.componentRef = this.windowsStore.createWindow(FancyWindowComponent);
+    this.componentRef = this.windowsStore.createWindow(FancyMusicPlayerComponent);
   }
 
   close() {

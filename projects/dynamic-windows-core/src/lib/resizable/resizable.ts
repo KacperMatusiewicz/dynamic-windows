@@ -1,4 +1,4 @@
-import {ElementRef, Inject, Input} from "@angular/core";
+import {ElementRef, Inject} from "@angular/core";
 import {fromEvent, Subscription, takeUntil} from "rxjs";
 import {DOCUMENT} from "@angular/common";
 

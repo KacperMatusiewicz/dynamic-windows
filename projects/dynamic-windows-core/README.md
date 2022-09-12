@@ -24,7 +24,7 @@ First you have to specify what dom element should act as a "**display**"
 
 ```html
 <!-- app.component.html -->
-<div ngModel #vcr></div>
+<div #vcr></div>
 ```
 
 ```ts
@@ -46,7 +46,7 @@ export class AppComponent implements AfterViewInit {
 ### Create a window
 ```html
 <!-- window.component.html -->
-<div style="background-color: blueviolet; height: 100px; width: 100px;">
+<div style="background-color: blueviolet; height: 100px; width: 100px;" dw-windowframe>
   This is a Window!
 </div>
 ```
@@ -174,6 +174,35 @@ sequenceDiagram
 
 Note, that you can create multiple windows from the same HTML element, 
 because while creating a window, the HTML element is cloned into it. 
+### Create custom wrapping window
+In order to create a custom wrapping window, instead of extending DynamicWindow you extend `WrappingWindow` and override those methods:
+
+Example of creating custom wrapping window:
+```ts
+@Component(...)
+export class HtmlWrappingWindowComponent extends WrappingWindow {
+    
+  // implemented abstract members:
+  
+  // it's the method being invoke while creating a component via service 
+  public addHtmlElement(element: HTMLElement) {
+    this.element = element.cloneNode(true);
+  }
+
+  // this method makes sure sure that added HTML element will be appended
+  // to the view as soon as the view initializes
+  // (it's called in the ngAfterViewInit hook)
+  appendChild(): void {
+    if (this.element !== undefined) {
+      this.container.nativeElement.appendChild(this.element);
+    }
+  }
+}
+```
+`addHtmlElement()` is called when the element is created and this is where you should assign it to some field .
+
+`appendChild()` is called when the window is ready to display it, it's here you want to add it to your window.
+Trying to append the element in `addHtmlElement()` will probably result in failure so refrain from doing that.
 
 ## Window structure
 

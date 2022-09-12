@@ -1,4 +1,4 @@
-import { Resizable } from './resizable';
+import {Resizable} from './resizable';
 
 describe('Resizable', () => {
   it('should create an instance', () => {

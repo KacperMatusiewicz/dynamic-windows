@@ -1,7 +1,5 @@
 import {AfterViewInit, Directive, ElementRef, OnDestroy, ViewContainerRef} from '@angular/core';
 import {WindowStoreService} from "../window-store.service";
-import {DynamicWindow} from "../dynamic-window";
-import {fromEvent, Subscription} from "rxjs";
 import {Focusable} from "./focusable";
 
 @Directive({

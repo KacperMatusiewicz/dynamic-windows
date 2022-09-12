@@ -1,32 +1,35 @@
 import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
-import {DynamicWindow} from "../dynamic-window";
+import {WrappingWindow} from "../wrapping-window";
 
 @Component({
   selector: 'simple-window',
   templateUrl: './simple-window.component.html',
   styleUrls: ['./simple-window.component.css']
 })
-export class SimpleWindowComponent extends DynamicWindow implements AfterViewInit {
-
+export class SimpleWindowComponent extends WrappingWindow implements AfterViewInit{
   element: Node | undefined;
 
   @ViewChild("container")
   container!: ElementRef;
 
+  windowTitle: string = "";
+
   constructor() {
     super();
   }
 
-  ngAfterViewInit(): void {
-    console.log("view init")
-    if (this.element !== undefined) {
-      this.container.nativeElement.appendChild(this.element);
-    }
+  setTitle(windowTitle: string){
+    this.windowTitle = windowTitle;
   }
 
   public addHtmlElement(element: HTMLElement) {
     this.element = element.cloneNode(true);
-    console.log("add");
+  }
+
+  appendChild(): void {
+    if (this.element !== undefined) {
+      this.container.nativeElement.appendChild(this.element);
+    }
   }
 
 

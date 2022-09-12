@@ -1,6 +1,5 @@
 import {AfterViewInit, Directive, ElementRef, Inject, Input} from '@angular/core';
 import {DOCUMENT} from "@angular/common";
-import {fromEvent, Subscription, takeUntil} from "rxjs";
 import {Resizable} from "./resizable";
 
 @Directive({

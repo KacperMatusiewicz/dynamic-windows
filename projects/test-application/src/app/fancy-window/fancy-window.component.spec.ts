@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FancyWindowComponent } from './fancy-window.component';
+import {FancyWindowComponent} from './fancy-window.component';
 
 describe('FancyWindowComponent', () => {
   let component: FancyWindowComponent;

@@ -6,6 +6,13 @@
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "paths": {
+      "dynamic-components": [
+        "dist/dynamic-components"
+      ],
+      "dynamic-windows": [
+        "dist/dynamic-windows",
+        "dist/dynamic-windows"
+      ],
       "dynamic-windows-core": [
         "dist/dynamic-windows-core"
       ]

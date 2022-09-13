@@ -1,6 +1,6 @@
 import {AfterViewInit, Directive, ElementRef, OnDestroy, ViewContainerRef} from '@angular/core';
-import {WindowStoreService} from "../window-store.service";
 import {Focusable} from "./focusable";
+import {WindowStoreService} from "../../window-management/window-store.service";
 
 @Directive({
   selector: '[dw-focusable]'

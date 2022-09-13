@@ -1,8 +1,8 @@
 import {AfterViewInit, Component, ComponentRef, ViewChild, ViewContainerRef} from '@angular/core';
-import {WindowStoreService} from "../../../dynamic-windows-core/src/lib/window-store.service";
 import {ExampleComponent} from "./example/example.component";
 import {FancyMusicPlayerComponent} from "./fancy-music-player/fancy-music-player.component";
-import {HtmlWrappingWindowComponent} from "./html-wrapping-window/html-wrapping-window.component";
+import {WindowStoreService} from "dynamic-windows-core";
+import {ExampleHtmlWrappingComponent} from "./example-html-wrapping/example-html-wrapping.component";
 
 @Component({
   selector: 'app-root',
@@ -45,7 +45,7 @@ export class AppComponent implements AfterViewInit{
     e3.width = 100;
     e.appendChild(e2);
     e.appendChild(e3);
-    this.windowsStore.createWindowFromHtmlElement(e);
-    this.windowsStore.createWindowFromHtmlElement(e, HtmlWrappingWindowComponent);
+    this.windowsStore.createWindowFromHtmlElement(e, ExampleHtmlWrappingComponent);
+    this.windowsStore.createWindowFromHtmlElement(e, ExampleHtmlWrappingComponent);
   }
 }

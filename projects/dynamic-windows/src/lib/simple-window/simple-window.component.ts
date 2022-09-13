@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
-import {WrappingWindow} from "../wrapping-window";
+import {WrappingWindow} from "dynamic-windows-core";
 
 @Component({
   selector: 'simple-window',
@@ -22,11 +22,11 @@ export class SimpleWindowComponent extends WrappingWindow implements AfterViewIn
     this.windowTitle = windowTitle;
   }
 
-  public addHtmlElement(element: HTMLElement) {
+  public override addHtmlElement(element: HTMLElement) {
     this.element = element.cloneNode(true);
   }
 
-  appendChild(): void {
+  public override appendChild(): void {
     if (this.element !== undefined) {
       this.container.nativeElement.appendChild(this.element);
     }

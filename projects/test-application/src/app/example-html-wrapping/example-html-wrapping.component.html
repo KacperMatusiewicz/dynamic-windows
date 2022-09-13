@@ -1,0 +1,16 @@
+<div dw-windowframe class="window">
+  <div class="wrapper">
+    <div dw-draggable-space class="titlebar">
+      <div class="window-title" title="{{windowTitle}}">{{windowTitle}}</div>
+      <ul dw-non-draggable-space="recursive-child" class="window-buttons">
+        <li class="window-button button-minimize"></li>
+        <li class="window-button button-maximize"></li>
+        <li (click)="resolveCloseWindowAction()" class="window-button button-close"></li>
+      </ul>
+
+    </div>
+    <div class="content">
+      <div #container ></div>
+    </div>
+  </div>
+</div>

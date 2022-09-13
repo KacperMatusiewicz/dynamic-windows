@@ -1,4 +1,4 @@
-import {WindowStoreService} from "./window-store.service";
+import {WindowStoreService} from "./window-management/window-store.service";
 import {WindowInjector} from "./dynamic-windows-core.module";
 
 export class DynamicWindow {
@@ -9,7 +9,6 @@ export class DynamicWindow {
   constructor() {
    this.w = WindowInjector.get(WindowStoreService);
   }
-
   public setId(id: number): void {
     this.id = id;
   }

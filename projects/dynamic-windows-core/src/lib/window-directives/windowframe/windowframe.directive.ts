@@ -1,9 +1,9 @@
 import {AfterViewInit, Directive, ElementRef, Inject, OnDestroy, ViewContainerRef} from '@angular/core';
-import {WindowStoreService} from "../window-store.service";
 import {Draggable} from "../draggable/draggable";
 import {DOCUMENT} from "@angular/common";
 import {Focusable} from "../focusable/focusable";
 import {Resizable} from "../resizable/resizable";
+import {WindowStoreService} from "../../window-management/window-store.service";
 
 @Directive({
   selector: '[dw-windowframe]'

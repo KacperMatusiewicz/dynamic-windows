@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {DynamicWindow} from "../../../../dynamic-windows-core/src/lib/dynamic-window";
 import {Song} from "./song";
+import {DynamicWindow} from "dynamic-windows-core";
 
 @Component({
   selector: 'app-fancy-music-player',

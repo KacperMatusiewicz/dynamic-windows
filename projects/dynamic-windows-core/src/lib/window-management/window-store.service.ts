@@ -1,7 +1,7 @@
 import {ComponentRef, Injectable, Type, ViewContainerRef} from '@angular/core';
-import {DynamicWindow} from "./dynamic-window";
-import {SimpleWindowComponent} from "./simple-window/simple-window.component";
+import {DynamicWindow} from "../dynamic-window";
 import {WrappingWindow} from "./wrapping-window";
+
 
 @Injectable({
   providedIn: 'root'
@@ -36,9 +36,8 @@ export class WindowStoreService {
     throw new DOMException();
   }
 
-  createWindowFromHtmlElement<T extends WrappingWindow>(element: HTMLElement, wrapperComponent?: Type<T> ) : ComponentRef<T> {
+  createWindowFromHtmlElement<T extends WrappingWindow>(element: HTMLElement, wrapperComponent: Type<T> ) : ComponentRef<T> {
     let componentRef: ComponentRef<any>;
-    if(typeof(wrapperComponent) !== 'undefined') {
       if(this.windowContainerRef !== undefined){
         componentRef = this.windowContainerRef?.createComponent(wrapperComponent);
         componentRef.instance.addHtmlElement(element);
@@ -46,15 +45,6 @@ export class WindowStoreService {
         this.windowList.set(this.idCounter++, componentRef);
         return componentRef;
       }
-    } else {
-      if(this.windowContainerRef !== undefined){
-        componentRef = this.windowContainerRef?.createComponent(SimpleWindowComponent);
-        componentRef.instance.addHtmlElement(element);
-        componentRef.instance.setId(this.idCounter);
-        this.windowList.set(this.idCounter++, componentRef);
-        return componentRef;
-      }
-    }
     throw new DOMException();
   }
 

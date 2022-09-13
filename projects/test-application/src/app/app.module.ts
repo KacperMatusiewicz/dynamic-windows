@@ -1,12 +1,13 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {DynamicWindowsCoreModule} from "../../../dynamic-windows-core/src/lib/dynamic-windows-core.module";
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ExampleComponent} from './example/example.component';
 import {FancyWindowComponent} from './fancy-window/fancy-window.component';
 import {FancyMusicPlayerComponent} from './fancy-music-player/fancy-music-player.component';
-import {HtmlWrappingWindowComponent} from './html-wrapping-window/html-wrapping-window.component';
+import {ExampleHtmlWrappingComponent} from './example-html-wrapping/example-html-wrapping.component';
+import {DynamicWindowsCoreModule} from "dynamic-windows-core";
+
 
 @NgModule({
   declarations: [
@@ -14,7 +15,7 @@ import {HtmlWrappingWindowComponent} from './html-wrapping-window/html-wrapping-
     ExampleComponent,
     FancyWindowComponent,
     FancyMusicPlayerComponent,
-    HtmlWrappingWindowComponent
+    ExampleHtmlWrappingComponent,
   ],
   imports: [
     BrowserModule,

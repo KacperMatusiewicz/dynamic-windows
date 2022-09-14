@@ -7,20 +7,26 @@
 Use the Angular CLI's installation schematic to set up your Dynamic Windows project
 by running the following command:
 
+```shell
+$ ng add dynamic-windows-core
 ```
-ng add dynamic-windows-core
-```
-
  or
-
+```shell
+$ npm install dynamic-windows-core
 ```
-npm install dynamic-windows-core
-```
-
 
 ### Initiate a window service
+There are two ways of defining a display, either using a directive or inside the component by calling `windowStore.setWindowContainerRef()`.
 
 First you have to specify what dom element should act as a "**display**"
+
+Using a directive, this method is less intrusive and much simpler:
+```html
+<!-- app.component.html -->
+<div dw-display></div>
+```
+
+or if you want to do it by directly calling WindowStoreService:
 
 ```html
 <!-- app.component.html -->
@@ -46,7 +52,7 @@ export class AppComponent implements AfterViewInit {
 ### Create a window
 ```html
 <!-- window.component.html -->
-<div style="background-color: blueviolet; height: 100px; width: 100px;" dw-windowframe>
+<div dw-windowframe style="background-color: blueviolet; height: 100px; width: 100px;">
   This is a Window!
 </div>
 ```

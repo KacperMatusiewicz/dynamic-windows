@@ -1,4 +1,4 @@
-import {AfterViewInit, Directive, ElementRef, OnDestroy, ViewContainerRef} from '@angular/core';
+import {AfterViewInit, Directive, ElementRef, Input, OnDestroy, ViewContainerRef} from '@angular/core';
 import {Focusable} from "./focusable";
 import {WindowStoreService} from "../../window-management/window-store.service";
 
@@ -6,6 +6,9 @@ import {WindowStoreService} from "../../window-management/window-store.service";
   selector: '[dw-focusable]'
 })
 export class FocusableDirective extends Focusable implements AfterViewInit, OnDestroy{
+
+  @Input("recursiveMarking")
+  recursiveMarkingInput: string = "false";
 
   constructor(
     private elementReference: ElementRef,
@@ -17,6 +20,7 @@ export class FocusableDirective extends Focusable implements AfterViewInit, OnDe
 
   ngAfterViewInit(): void {
     super.focusableAfterViewInit();
+    super.setRecursiveMarking(this.recursiveMarkingInput);
   }
 
   ngOnDestroy(): void {

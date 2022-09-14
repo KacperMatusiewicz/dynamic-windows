@@ -330,5 +330,23 @@ This directive should be applied on the window frame:
   ...
 </div>
 ```
+### Custom styling for a focused window
+If you want your window to appear differently depending on whether it is focused,
+you can use `.dw-focused` class in your CSS.
+
+For example:
+```css
+
+.mybutton {
+  background-color: white;
+}
+
+/* When the window is focused */
+.dw-focused .mybutton {
+  background-color: red;
+}
+
+```
+
 
 ## Saving windows state to local storage

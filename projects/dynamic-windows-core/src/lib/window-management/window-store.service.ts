@@ -8,6 +8,7 @@ import {WrappingWindow} from "./wrapping-window";
 })
 export class WindowStoreService {
 
+  currentlyFocusedHtmlElement: HTMLElement | null = null;
   currentZIndex: number;
   idCounter: number;
 
@@ -64,14 +65,32 @@ export class WindowStoreService {
     if (this.windowList.has(id)) {
       // @ts-ignore
       const componentRef: ComponentRef<any> = this.windowList.get(id);
+      this.clearFocusWhileClosing(componentRef);
+
       componentRef.location.nativeElement.remove();
       this.windowList.delete(id);
     }
   }
 
+  clearFocusWhileClosing(componentRef: ComponentRef<any>) {
+    const el: HTMLElement = componentRef.location.nativeElement as HTMLElement;
+    if (el.getElementsByClassName("dw-focusable").item(0) === this.currentlyFocusedHtmlElement) {
+      this.currentlyFocusedHtmlElement = null;
+    }
+  }
   public getFocusNumber() : number {
     return ++this.currentZIndex;
   }
+
+  public getFocusedWindow(): HTMLElement | null{
+
+    return this.currentlyFocusedHtmlElement
+  }
+
+  public updateCurrentlyFocusedWindow(element: HTMLElement) {
+    this.currentlyFocusedHtmlElement = element;
+  }
+
 }
 
 

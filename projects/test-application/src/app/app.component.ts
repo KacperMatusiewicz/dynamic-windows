@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ComponentRef, ViewChild, ViewContainerRef} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ComponentRef, ViewChild, ViewContainerRef} from '@angular/core';
 import {ExampleComponent} from "./example/example.component";
 import {FancyMusicPlayerComponent} from "./fancy-music-player/fancy-music-player.component";
 import {WindowStoreService} from "dynamic-windows-core";
@@ -15,12 +15,14 @@ export class AppComponent implements AfterViewInit{
   @ViewChild("vcr", {read: ViewContainerRef})
   vcr!: ViewContainerRef;
   componentRef!: ComponentRef<ExampleComponent>;
-  constructor(private windowsStore: WindowStoreService) {
+  constructor(private windowsStore: WindowStoreService, private change: ChangeDetectorRef) {
 
   }
 
   ngAfterViewInit(): void {
     // this.windowsStore.setWindowContainerRef(this.vcr);
+    this.componentRef = this.windowsStore.createWindow(FancyMusicPlayerComponent);
+    this.change.detectChanges();
   }
 
   create() {

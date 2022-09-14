@@ -20,6 +20,17 @@
   background-color: #212121;
 }
 
+.window.dw-focused .window-buttons .window-button {
+
+  background-color: #3a3a3a;
+}
+
+.window.dw-focused .button-close::before,
+.window.dw-focused .button-close::after,
+.window.dw-focused .button-minimize::before{
+  background-color: #fff;
+}
+
 .window-buttons{
   display: flex;
   justify-content: center;
@@ -38,7 +49,7 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background-color: #3a3a3a;
+  background-color: #2e2e2e;
 }
 
 .window-button:hover{
@@ -60,7 +71,7 @@
   content: '';
   width: 10px;
   height: 2px;
-  background-color: #fff;
+  background-color: #919191;
 }
 
 .button-minimize::before{

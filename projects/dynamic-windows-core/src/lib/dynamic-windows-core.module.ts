@@ -8,6 +8,7 @@ import {WindowFrameDirective} from "./window-directives/windowframe/windowframe.
 import {FocusableDirective} from "./window-directives/focusable/focusable.directive";
 import {WindowStoreService} from "./window-management/window-store.service";
 import {WrappingWindow} from "./window-management/wrapping-window";
+import { DisplayDirective } from './window-management/display.directive';
 
 export let WindowInjector: Injector;
 
@@ -19,7 +20,8 @@ export let WindowInjector: Injector;
     NonDraggableSpaceDirective,
     WindowFrameDirective,
     FocusableDirective,
-    WrappingWindow
+    WrappingWindow,
+    DisplayDirective
   ],
   imports: [
     CommonModule
@@ -31,7 +33,8 @@ export let WindowInjector: Injector;
     NonDraggableSpaceDirective,
     WindowFrameDirective,
     FocusableDirective,
-    WrappingWindow
+    WrappingWindow,
+    DisplayDirective
   ],
   providers: []
 })

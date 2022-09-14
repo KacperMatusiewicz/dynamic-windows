@@ -11,6 +11,7 @@ export {ResizableDirective} from "./lib/window-directives/resizable/resizable.di
 export {WindowStoreService}  from './lib/window-management/window-store.service';
 export {FocusableDirective} from "./lib/window-directives/focusable/focusable.directive";
 export {WindowFrameDirective} from "./lib/window-directives/windowframe/windowframe.directive";
+export {DisplayDirective} from './lib/window-management/display.directive';
 
 export {DynamicWindow} from './lib/dynamic-window';
 export {WrappingWindow} from './lib/window-management/wrapping-window';

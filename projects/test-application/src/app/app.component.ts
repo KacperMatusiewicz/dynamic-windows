@@ -20,7 +20,7 @@ export class AppComponent implements AfterViewInit{
   }
 
   ngAfterViewInit(): void {
-    this.windowsStore.setWindowContainerRef(this.vcr);
+    // this.windowsStore.setWindowContainerRef(this.vcr);
   }
 
   create() {

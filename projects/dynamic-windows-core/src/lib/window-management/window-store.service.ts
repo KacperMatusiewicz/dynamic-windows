@@ -30,6 +30,7 @@ export class WindowStoreService {
     if(this.windowContainerRef !== undefined) {
       componentRef = this.windowContainerRef?.createComponent(cls);
       componentRef.instance.setId(this.idCounter);
+      this.windowContainerRef.element.nativeElement.appendChild(componentRef.location.nativeElement as HTMLElement);
       this.windowList.set(this.idCounter++, componentRef);
       return componentRef;
     }
@@ -42,6 +43,7 @@ export class WindowStoreService {
         componentRef = this.windowContainerRef?.createComponent(wrapperComponent);
         componentRef.instance.addHtmlElement(element);
         componentRef.instance.setId(this.idCounter);
+        this.windowContainerRef.element.nativeElement.appendChild(componentRef.location.nativeElement as HTMLElement);
         this.windowList.set(this.idCounter++, componentRef);
         return componentRef;
       }

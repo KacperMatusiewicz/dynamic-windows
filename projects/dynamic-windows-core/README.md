@@ -1,5 +1,20 @@
-# Dynamic Windows
+# Dynamic Windows Core
 ## About
+Project containing main engine of Dynamic Windows that makes possible creating and managing 
+dynamic custom windows.
+
+## Ecosystem
+Projects:
+- dynamic-windows-core
+  
+[Github](https://github.com/KacperMatusiewicz/dynamic-windows) | 
+[npm](https://www.npmjs.com/package/dynamic-windows-core)
+- dynamic-windows
+ 
+[Github](https://github.com/KacperMatusiewicz/dynamic-windows) | 
+[npm](#)
+
+
 ## Getting started
 
 ### Install Dynamic Windows
@@ -347,6 +362,22 @@ For example:
 }
 
 ```
+### Custom styling for an unfocused window
+If you want to style your windows by default based on them being focused, 
+you can use `.dw-not-focused` class to apply styles for an unfocused case in your CSS.
 
+For example:
+```css
+
+.mybutton {
+  background-color: red;
+}
+
+/* When the window is not focused */
+.dw-not-focused .mybutton {
+  background-color: grey;
+}
+
+```
 
 ## Saving windows state to local storage

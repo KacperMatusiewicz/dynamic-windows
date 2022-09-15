@@ -8,7 +8,6 @@ export class Focusable {
   id: number | undefined;
   element: HTMLElement;
   subscriptions: Subscription[] = [];
-  private recursiveMarking: boolean = false;
 
   constructor(
     private elementRef: ElementRef,
@@ -17,12 +16,6 @@ export class Focusable {
   ) {
     this.element = elementRef.nativeElement;
     this.element.classList.add("dw-focusable");
-  }
-
-  setRecursiveMarking(recursiveMarking: string) : void {
-    if(recursiveMarking === 'true') {
-      this.recursiveMarking = true;
-    }
   }
 
   focusableAfterViewInit(): void {
@@ -51,7 +44,8 @@ export class Focusable {
       this.unfocusCurrentlyFocusedWindow();
     }
     if(!this.element.classList.contains('dw-focused')) {
-      this.element.classList.add('dw-focused')
+      this.removeUnfocusedClass(this.element);
+      this.addFocusedClass(this.element);
       this.element.style.zIndex = `${this.windowsService.getFocusNumber()}`;
       this.windowsService.updateCurrentlyFocusedWindow(this.element);
     }
@@ -62,14 +56,23 @@ export class Focusable {
     let focused = this.windowsService.getFocusedWindow();
     if (focused !== null){
       this.removeFocusedClass(focused);
+      this.addUnfocusedClass(focused);
     }
   }
 
+  private addFocusedClass(el: HTMLElement) {
+    el.classList.add("dw-focused");
+  }
+
   private removeFocusedClass(el: HTMLElement) {
-    if(!this.recursiveMarking) {
-      el.classList.remove('dw-focused');
-    } else {
-      console.log("recursive marking to be implemented yet");
-    }
+    el.classList.remove('dw-focused');
+  }
+
+  private removeUnfocusedClass(el: HTMLElement) {
+    el.classList.remove('dw-not-focused');
+  }
+
+  private addUnfocusedClass(el: HTMLElement) {
+    el.classList.add("dw-not-focused");
   }
 }

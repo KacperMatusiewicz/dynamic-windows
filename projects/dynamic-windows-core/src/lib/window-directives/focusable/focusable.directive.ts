@@ -7,9 +7,6 @@ import {WindowStoreService} from "../../window-management/window-store.service";
 })
 export class FocusableDirective extends Focusable implements AfterViewInit, OnDestroy{
 
-  @Input("recursiveMarking")
-  recursiveMarkingInput: string = "false";
-
   constructor(
     private elementReference: ElementRef,
     private viewContainerRef: ViewContainerRef,
@@ -20,7 +17,6 @@ export class FocusableDirective extends Focusable implements AfterViewInit, OnDe
 
   ngAfterViewInit(): void {
     super.focusableAfterViewInit();
-    super.setRecursiveMarking(this.recursiveMarkingInput);
   }
 
   ngOnDestroy(): void {

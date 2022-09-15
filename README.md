@@ -1,10 +1,16 @@
-# Dynamic Windows Workspace
-
-Repository containing source code for dynamic windows library and its test environment.
-
+# Dynamic Windows
 ## About
-Dynamic Windows is an Angular library simplifying creation and management of dynamic components.
-The main goal was to create easy interface to manage dynamically created windows imitating behaviour of modern operating systems.
+Angular based library for creation and management of dynamic components (with separate windows creation in mind)
+, it includes some basic components implementations to get you quickly going without the need of making them yourself.
+Designed for `dynamic-windows-core` engine.
 
-Here you can learn more about Dynamic Windows library:
-[library docs](projects/dynamic-windows-core/README.md).
+## Ecosystem
+Projects:
+- dynamic-windows-core
+  
+[Github](https://github.com/KacperMatusiewicz/dynamic-windows) |
+  [npm](https://www.npmjs.com/package/dynamic-windows-core)
+- dynamic-windows
+ 
+[Github](https://github.com/KacperMatusiewicz/dynamic-windows) |
+  [npm](#)

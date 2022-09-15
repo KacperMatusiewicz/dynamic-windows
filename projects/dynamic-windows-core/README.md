@@ -7,12 +7,13 @@ dynamic custom windows.
 Projects:
 - dynamic-windows-core
   
-[Github](https://github.com/KacperMatusiewicz/dynamic-windows) | 
-[npm](https://www.npmjs.com/package/dynamic-windows-core)
+[Github](https://github.com/KacperMatusiewicz/dynamic-windows/blob/master/projects/dynamic-windows-core) |
+  [npm](https://www.npmjs.com/package/dynamic-windows-core)
 - dynamic-windows
  
-[Github](https://github.com/KacperMatusiewicz/dynamic-windows) | 
-[npm](#)
+[Github](https://github.com/KacperMatusiewicz/dynamic-windows/blob/master/projects/dynamic-windows) |
+  [npm](#)
+
 
 
 ## Getting started

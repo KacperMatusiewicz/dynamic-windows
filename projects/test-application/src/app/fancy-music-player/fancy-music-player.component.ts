@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Song} from "./song";
-import {DynamicWindow} from "dynamic-windows-core";
+import {DynamicWindow, ViewOperation} from "dynamic-windows-core";
 
 @Component({
   selector: 'app-fancy-music-player',
@@ -100,11 +100,13 @@ export class FancyMusicPlayerComponent extends DynamicWindow implements OnInit, 
       ]);
   }
 
+  @ViewOperation()
   public setSize(width: number, height: number){
     (this.wrapper.nativeElement as HTMLElement).style.width  = `${width}px`;
     (this.wrapper.nativeElement as HTMLElement).style.height = `${height}px`;
   }
 
+  @ViewOperation()
   public setPosition(x: number, y: number){
     (this.wrapper.nativeElement as HTMLElement).style.left = `${x}px`;
     (this.wrapper.nativeElement as HTMLElement).style.top  = `${y}px`;

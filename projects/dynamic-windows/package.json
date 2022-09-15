@@ -2,6 +2,10 @@
   "name": "dynamic-windows",
   "version": "0.0.1",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KacperMatusiewicz/dynamic-windows.git"
+  },
   "peerDependencies": {
     "@angular/common": "^14.0.0",
     "@angular/core": "^14.0.0"

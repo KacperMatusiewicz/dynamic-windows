@@ -1,7 +1,11 @@
 {
   "name": "dynamic-windows-core",
   "license": "MIT",
-  "version": "0.0.8",
+  "version": "0.0.9",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KacperMatusiewicz/dynamic-windows.git"
+  },
   "peerDependencies": {
     "@angular/common": "^14.0.0",
     "@angular/core": "^14.0.0"

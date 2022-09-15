@@ -381,4 +381,53 @@ For example:
 
 ```
 
+## Setting data to component and invoking its methods
+
+After creating a window component you can invoke its methods by simply referencing
+its instance property which is returned by `createWindow()` method.
+
+```ts
+...
+  createMusicPlayerWindow(): void {
+    let createdWindow = this.windowsStore.createWindow(SomeWindowComponent);
+    createdWindow.instance.someMethod(); 
+  }
+...
+```
+Or like that if you don't want to store reference to this window in your window creating class.
+```ts
+...
+createMusicPlayerWindow(): void {
+  this.windowsStore.createWindow(SomeWindowComponent).instance.someMethod();
+}
+...
+```
+
+### Invoking methods which are operating on component's view
+This method operates on the view, therefore it has to be called after
+the view has been initialized.
+You can assure that by decorating the method with `@ViewOperation()` decorator.
+
+```ts
+// fancy-music-player.component.ts
+...
+  @ViewOperation()
+  public setSize(width: number, height: number){
+  (this.wrapper.nativeElement as HTMLElement).style.width  = `${width}px`;
+    (this.wrapper.nativeElement as HTMLElement).style.height = `${height}px`;
+  }
+...
+```
+And then you can execute the method as usual.
+
+```ts
+// app.component.ts
+...
+  createMusicPlayerWindow(): void {
+    let player = this.windowsStore.createWindow(FancyMusicPlayerComponent);
+    player.instance.setSize(600,600); 
+  }
+...
+```
+
 ## Saving windows state to local storage

@@ -1,8 +1,11 @@
 # Dynamic Windows
-Repository containing source code for dynamic windows library ecosystem.
+## About
+Angular based library for creation and management of dynamic components (with separate windows creation in mind)
+, it includes some basic components implementations to get you quickly going without the need of making them yourself.
+Designed for `dynamic-windows-core` engine.
 
 ## Ecosystem
-
+Projects:
 - dynamic-windows-core
   
 [Github](https://github.com/KacperMatusiewicz/dynamic-windows) |

@@ -319,15 +319,19 @@ export class Resizable {
   getMinWidthSize(): number {
     if(this.element.style.minWidth.length>0 && this.element.style.minWidth !== "fit-content"){
       return this.parseToNumber(this.element.style.minWidth);
+    }else{
+      let minSize = this.parseToNumber(getComputedStyle(this.element)['minWidth']);
+      return minSize;
     }
-    return 0;
   }
 
   getMinHeightSize(): number {
     if(this.element.style.minHeight.length>0 && this.element.style.minHeight !== "fit-content"){
       return this.parseToNumber(this.element.style.minHeight);
+    }else{
+      let minSize = this.parseToNumber(getComputedStyle(this.element)['minHeight']);
+      return minSize;
     }
-    return 0;
   }
   private parseToNumber(string: string): number {
     let ret = string.length !== 0 ? Number.parseInt(

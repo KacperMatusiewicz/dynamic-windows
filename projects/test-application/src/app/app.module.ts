@@ -7,6 +7,8 @@ import {FancyWindowComponent} from './fancy-window/fancy-window.component';
 import {FancyMusicPlayerComponent} from './fancy-music-player/fancy-music-player.component';
 import {ExampleHtmlWrappingComponent} from './example-html-wrapping/example-html-wrapping.component';
 import {DynamicWindowsCoreModule} from "dynamic-windows-core";
+import {DiscordComponent} from './discord/discord.component';
+import {TaskbarComponent} from './taskbar/taskbar.component';
 
 
 @NgModule({
@@ -16,6 +18,8 @@ import {DynamicWindowsCoreModule} from "dynamic-windows-core";
     FancyWindowComponent,
     FancyMusicPlayerComponent,
     ExampleHtmlWrappingComponent,
+    DiscordComponent,
+    TaskbarComponent,
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,7 @@ export {WindowFrameDirective} from "./lib/window-directives/windowframe/windowfr
 export {DisplayDirective} from './lib/window-management/display.directive';
 
 export {DynamicWindow} from './lib/dynamic-window';
+export {Taskbar} from './lib/taskbar';
 export {WrappingWindow} from './lib/window-management/wrapping-window';
 
 export {ViewOperation} from "./lib/view-operation.decorator";

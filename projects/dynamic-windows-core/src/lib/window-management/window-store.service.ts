@@ -1,6 +1,7 @@
 import {ComponentRef, Injectable, Type, ViewContainerRef} from '@angular/core';
 import {DynamicWindow} from "../dynamic-window";
 import {WrappingWindow} from "./wrapping-window";
+import {Taskbar} from "../taskbar";
 
 
 @Injectable({
@@ -11,6 +12,7 @@ export class WindowStoreService {
   currentlyFocusedHtmlElement: HTMLElement | null = null;
   currentZIndex: number;
   idCounter: number;
+  private taskBar!: any
 
   windowContainerRef : ViewContainerRef | undefined;
   windowList:  Map<Number, ComponentRef<any>>;
@@ -33,6 +35,7 @@ export class WindowStoreService {
       componentRef.instance.setId(this.idCounter);
       this.windowContainerRef.element.nativeElement.appendChild(componentRef.location.nativeElement as HTMLElement);
       this.windowList.set(this.idCounter++, componentRef);
+      this.updateTaskbar();
       return componentRef;
     }
     throw new DOMException();
@@ -46,6 +49,7 @@ export class WindowStoreService {
         componentRef.instance.setId(this.idCounter);
         this.windowContainerRef.element.nativeElement.appendChild(componentRef.location.nativeElement as HTMLElement);
         this.windowList.set(this.idCounter++, componentRef);
+        this.updateTaskbar();
         return componentRef;
       }
     throw new DOMException();
@@ -57,6 +61,7 @@ export class WindowStoreService {
       // @ts-ignore
       const componentRef: ComponentRef<any> = this.windowList.get(id);
       componentRef.instance.resolveCloseWindowAction();
+      this.updateTaskbar();
     }
 
   }
@@ -69,6 +74,7 @@ export class WindowStoreService {
 
       componentRef.location.nativeElement.remove();
       this.windowList.delete(id);
+      this.updateTaskbar();
     }
   }
 
@@ -76,6 +82,7 @@ export class WindowStoreService {
     const el: HTMLElement = componentRef.location.nativeElement as HTMLElement;
     if (el.getElementsByClassName("dw-focusable").item(0) === this.currentlyFocusedHtmlElement) {
       this.currentlyFocusedHtmlElement = null;
+      this.updateTaskbar();
     }
   }
   public getFocusNumber() : number {
@@ -91,6 +98,15 @@ export class WindowStoreService {
     this.currentlyFocusedHtmlElement = element;
   }
 
+  private updateTaskbar(){
+    if (this.taskBar){
+      this.taskBar.updateTaskbar();
+    }
+  }
+
+  public setTaskbar<T extends Taskbar>(taskbar: T){
+    this.taskBar = taskbar
+  }
 }
 
 

@@ -1,4 +1,4 @@
-import {AfterViewInit, Directive, ElementRef, Input, OnDestroy, ViewContainerRef} from '@angular/core';
+import {AfterViewInit, Directive, ElementRef, OnDestroy, ViewContainerRef} from '@angular/core';
 import {Focusable} from "./focusable";
 import {WindowStoreService} from "../../window-management/window-store.service";
 

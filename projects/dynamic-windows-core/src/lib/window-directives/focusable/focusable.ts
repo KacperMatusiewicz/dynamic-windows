@@ -1,5 +1,5 @@
 import {fromEvent, Subscription} from "rxjs";
-import {ComponentRef, ElementRef, ViewContainerRef} from "@angular/core";
+import {ElementRef, ViewContainerRef} from "@angular/core";
 import {WindowStoreService} from "../../window-management/window-store.service";
 
 

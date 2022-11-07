@@ -6,9 +6,8 @@ import {DraggableSpaceDirective} from "./window-directives/draggable/draggable-s
 import {NonDraggableSpaceDirective} from "./window-directives/draggable/non-draggable-space.directive";
 import {WindowFrameDirective} from "./window-directives/windowframe/windowframe.directive";
 import {FocusableDirective} from "./window-directives/focusable/focusable.directive";
-import {WindowStoreService} from "./window-management/window-store.service";
 import {WrappingWindow} from "./window-management/wrapping-window";
-import { DisplayDirective } from './window-management/display.directive';
+import {DisplayDirective} from './window-management/display.directive';
 
 export let WindowInjector: Injector;
 

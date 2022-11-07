@@ -1,4 +1,4 @@
-import {AfterViewInit, Directive, ViewContainerRef} from '@angular/core';
+import {Directive, ViewContainerRef} from '@angular/core';
 import {WindowStoreService} from "./window-store.service";
 
 @Directive({

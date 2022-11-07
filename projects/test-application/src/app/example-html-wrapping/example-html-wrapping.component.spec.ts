@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ExampleHtmlWrappingComponent } from './example-html-wrapping.component';
+import {ExampleHtmlWrappingComponent} from './example-html-wrapping.component';
 
 describe('ExampleHtmlWrappingComponent', () => {
   let component: ExampleHtmlWrappingComponent;

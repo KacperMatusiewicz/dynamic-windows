@@ -10,7 +10,7 @@
 
     </div>
     <div class="content">
-      <textarea>Hello this is my simple text editor!</textarea>
+      <textarea #inputField (keyup)="updateTitle($event)">Hello this is my simple text editor!</textarea>
     </div>
   </div>
 </div>

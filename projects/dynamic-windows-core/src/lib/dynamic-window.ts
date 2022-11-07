@@ -5,6 +5,8 @@ export class DynamicWindow {
 
   id: number = -1;
   w: WindowStoreService;
+  windowName: string = ""
+  windowIconPath: string = ""
 
   constructor() {
    this.w = WindowInjector.get(WindowStoreService);

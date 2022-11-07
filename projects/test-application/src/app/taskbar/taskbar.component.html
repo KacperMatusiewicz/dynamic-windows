@@ -1,0 +1,25 @@
+<div class="wrapper">
+  <ng-template ngFor let-i [ngForOf]="entries" >
+
+    <div *ngIf="this.isThisFocused(i); then focusedBlock else notFocusedBlock" ></div>
+
+    <ng-template #focusedBlock>
+      <div class="taskbar-item focused">
+        <div class="taskbar-item-inner">
+          <img *ngIf="i.instance.windowIconPath.length > 0" src="{{i.instance.windowIconPath}}" class="entry-icon">
+          <p class="window-name">{{i.instance.windowName}}</p>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template #notFocusedBlock>
+      <div class="taskbar-item">
+        <div class="taskbar-item-inner">
+          <img *ngIf="i.instance.windowIconPath.length > 0" src="{{i.instance.windowIconPath}}" class="entry-icon">
+          <p class="window-name">{{i.instance.windowName}}</p>
+        </div>
+      </div>
+    </ng-template>
+
+  </ng-template>
+</div>

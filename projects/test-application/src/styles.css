@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: Tahoma;
+  src: url("assets/tahoma.ttf");
+}
+
+@font-face {
+  font-family: TahomaBold;
+  src: url("assets/tahomabd.ttf");
+}
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html, body{
+  width: 100vw;
+  height: 100vh;
+  font-family: TahomaBold;
+}
+
+body{
+  background-image: url("assets/adwaita-d.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

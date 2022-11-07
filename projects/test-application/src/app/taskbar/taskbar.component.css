@@ -1,0 +1,88 @@
+.wrapper{
+  width: 100%;
+  max-width: 100%;
+  position: absolute;
+  bottom: 0;
+  height: 28px;
+  z-index: 9999;
+  background-color: #d4d0c8;
+  color: #000;
+  font-size: 11px;
+  gap: 2px;
+  box-sizing: border-box;
+  padding: 2px;
+  border-top: 1px solid #fff;
+  user-select: none;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+
+}
+
+.taskbar-item{
+  font-family: Tahoma;
+  max-width: 160px;
+  height: 22px;
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-basis: 160px;
+  flex-shrink: 1;
+}
+
+.taskbar-item-inner{
+  height: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  gap: 2px;
+  border-top: 1px solid transparent;
+  border-left: 1px solid transparent;
+  border-right: 1px solid #808080;
+  border-bottom: 1px solid #808080;
+  padding: 0 2px;
+}
+
+.focused .taskbar-item-inner {
+  border-top: 1px solid #808080;
+  border-left: 1px solid #808080;
+  border-right: 1px solid #d4d0c8;
+  border-bottom: 1px solid #d4d0c8;
+  background-color: #fff;
+  background-repeat: repeat;
+  background-image: url("../../assets/grid.png");
+}
+
+.focused.taskbar-item{
+  font-family: TahomaBold;
+  border-top: 1px solid #404040;
+  border-left: 1px solid #404040;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+}
+
+.taskbar-item-inner > img{
+  object-fit: cover;
+  object-position: center;
+  width: 16px;
+  min-width: 16px;
+  height: 16px;
+  min-height: 16px;
+  image-rendering: pixelated;
+}
+
+.window-name{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}

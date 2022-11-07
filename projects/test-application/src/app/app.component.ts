@@ -14,15 +14,15 @@ export class AppComponent implements AfterViewInit{
 
   @ViewChild("vcr", {read: ViewContainerRef})
   vcr!: ViewContainerRef;
-  componentRef!: ComponentRef<ExampleComponent>;
+  componentRef!: ComponentRef<any>;
   constructor(private windowsStore: WindowStoreService, private change: ChangeDetectorRef) {
 
   }
 
   ngAfterViewInit(): void {
     // this.windowsStore.setWindowContainerRef(this.vcr);
-    this.componentRef = this.windowsStore.createWindow(FancyMusicPlayerComponent);
-    this.change.detectChanges();
+    // this.componentRef = this.windowsStore.createWindow(DiscordComponent);
+    // this.change.detectChanges();
   }
 
   create() {

@@ -38,6 +38,8 @@ export class FancyMusicPlayerComponent extends DynamicWindow implements OnInit, 
 
   constructor() {
     super();
+    this.windowName = "Amberol"
+    this.windowIconPath = "assets/amberol.png"
     this.playlistSongs = [];
   }
 

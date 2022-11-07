@@ -9,6 +9,7 @@ import {ExampleHtmlWrappingComponent} from './example-html-wrapping/example-html
 import {DynamicWindowsCoreModule} from "dynamic-windows-core";
 import {DiscordComponent} from './discord/discord.component';
 import {TaskbarComponent} from './taskbar/taskbar.component';
+import {Win2kWindowComponent} from './win2k-window/win2k-window.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import {TaskbarComponent} from './taskbar/taskbar.component';
     ExampleHtmlWrappingComponent,
     DiscordComponent,
     TaskbarComponent,
+    Win2kWindowComponent,
   ],
   imports: [
     BrowserModule,

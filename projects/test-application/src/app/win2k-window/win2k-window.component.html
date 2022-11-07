@@ -1,0 +1,38 @@
+<div dw-windowframe class="wrapper w2k-border">
+  <div class="inner w2k-border-inner">
+    <div dw-draggable-space class="bar">
+      <div class="window-info">
+        <img *ngIf="windowIconPath.length > 0" src="{{windowIconPath}}" class="w2k-window-icon">
+        <div class="w2k-window-title">{{windowName}}</div>
+      </div>
+      <ul dw-non-draggable-space="recursive-child" class="buttons">
+        <li class="button w2k-box-border">
+          <div class="button-inner">
+            <div class="w2k-button-icon minimize-icon"></div>
+          </div>
+        </li>
+        <li class="button w2k-box-border">
+          <div class="button-inner">
+            <div class="w2k-button-icon maximize-icon"><div></div></div>
+          </div>
+        </li>
+        <li (click)="closeWindow()" class="button w2k-box-border">
+          <div class="button-inner">
+            <div class="w2k-button-icon close-icon"></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="content">
+        <ul class="menu">
+          <li>File</li>
+          <li>Edit</li>
+          <li>Format</li>
+          <li>Help</li>
+        </ul>
+      <div class="write-area">
+        <textarea>{{text}}</textarea>
+      </div>
+    </div>
+  </div>
+</div>

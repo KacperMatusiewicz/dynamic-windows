@@ -3,6 +3,7 @@ import {ExampleComponent} from "./example/example.component";
 import {FancyMusicPlayerComponent} from "./fancy-music-player/fancy-music-player.component";
 import {WindowStoreService} from "dynamic-windows-core";
 import {ExampleHtmlWrappingComponent} from "./example-html-wrapping/example-html-wrapping.component";
+import {Win2kWindowComponent} from "./win2k-window/win2k-window.component";
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,7 @@ export class AppComponent implements AfterViewInit{
 
   ngAfterViewInit(): void {
     // this.windowsStore.setWindowContainerRef(this.vcr);
-    // this.componentRef = this.windowsStore.createWindow(DiscordComponent);
+    //this.componentRef = this.windowsStore.createWindow(Win2kWindowComponent);
     // this.change.detectChanges();
   }
 
@@ -49,5 +50,9 @@ export class AppComponent implements AfterViewInit{
     e.appendChild(e3);
     this.windowsStore.createWindowFromHtmlElement(e, ExampleHtmlWrappingComponent);
     this.windowsStore.createWindowFromHtmlElement(e, ExampleHtmlWrappingComponent);
+  }
+
+  createOldLookingWindow() {
+    this.componentRef = this.windowsStore.createWindow(Win2kWindowComponent);
   }
 }

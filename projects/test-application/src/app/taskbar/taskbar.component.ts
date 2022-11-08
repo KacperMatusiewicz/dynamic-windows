@@ -16,7 +16,7 @@ export class TaskbarComponent extends Taskbar implements OnInit{
   ngOnInit(): void {
   }
 
-  focus(item: WindowEntry){
+  public focus(item: WindowEntry){
     this.ws.focus(item)
   }
 }

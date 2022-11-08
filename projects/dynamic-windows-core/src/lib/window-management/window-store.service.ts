@@ -70,12 +70,12 @@ export class WindowStoreService {
   }
 
   public focus(w: WindowEntry){
-    this.focusWindow(w.component.instance.id)
+    this.focusWindow(w.getId())
   }
 
   public focusWindow(id: number){
     let window = this.windowList.get(id)
-    if (window !== undefined){
+    if (window !== undefined && window.isEntryFocusable()){
       this.windowList.forEach((we, k) => {
         if (k !== id)
           we.unfocus()

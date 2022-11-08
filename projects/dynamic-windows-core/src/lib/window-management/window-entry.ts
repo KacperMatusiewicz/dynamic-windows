@@ -1,4 +1,5 @@
 import {ComponentRef} from "@angular/core";
+import {Element} from "@angular/compiler";
 
 export class WindowEntry {
   public component: ComponentRef<any>
@@ -49,33 +50,54 @@ export class WindowEntry {
     this.addFocusedClass()
   }
 
+  public isFocusable(element: Node): boolean {
+    let el = element as HTMLElement
+    if (el.classList.contains('dw-focusable'))
+      return true
+
+    return false
+  }
+
+  public isEntryFocusable(): boolean {
+    let elements = this.getDirectChildren()
+    for(let i=0; i<elements.length; i++)
+      if (this.isFocusable(elements[i]))
+        return true
+
+    return false
+  }
+
   public addFocusedClass(){
     let elements = this.getDirectChildren()
     for(let i=0; i<elements.length; i++){
-      elements[i].classList.add('dw-focused')
+      if (this.isFocusable(elements[i]))
+        elements[i].classList.add('dw-focused')
     }
   }
 
   public addNotFocusedClass() {
     let elements = this.getDirectChildren()
     for(let i=0; i<elements.length; i++){
-      elements[i].classList.add('dw-not-focused')
+      if (this.isFocusable(elements[i]))
+        elements[i].classList.add('dw-not-focused')
     }
   }
 
   public removeFocusedClass(){
     let elements = this.getDirectChildren()
     for(let i=0; i<elements.length; i++){
-      if (elements[i].classList.contains('dw-focused'))
-        elements[i].classList.remove('dw-focused')
+      if (this.isFocusable(elements[i]))
+        if (elements[i].classList.contains('dw-focused'))
+          elements[i].classList.remove('dw-focused')
     }
   }
 
   public removeNotFocusedClass() {
     let elements = this.getDirectChildren()
     for(let i=0; i<elements.length; i++){
-      if (elements[i].classList.contains('dw-not-focused'))
-        elements[i].classList.remove('dw-not-focused')
+      if (this.isFocusable(elements[i]))
+        if (elements[i].classList.contains('dw-not-focused'))
+          elements[i].classList.remove('dw-not-focused')
     }
   }
 

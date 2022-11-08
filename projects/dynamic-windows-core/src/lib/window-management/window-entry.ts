@@ -1,15 +1,42 @@
 import {ComponentRef} from "@angular/core";
 
 export class WindowEntry {
-  public componentRef: ComponentRef<any>
+  public component: ComponentRef<any>
 
 
   constructor(componentRef: ComponentRef<any>) {
-    this.componentRef = componentRef;
+    this.component = componentRef;
+  }
+
+  public getId(): number{
+    return this.component.instance.id
+  }
+
+  public hasId(id: number): boolean {
+    if (this.getId() === id)
+      return true
+
+    return false
   }
 
   public delete(){
-    this.componentRef.location.nativeElement.remove()
+    this.component.location.nativeElement.remove()
+  }
+
+  public getWindowName(): string {
+    return this.component.instance.windowName
+  }
+
+  public getWindowIconPath(): string {
+    return this.component.instance.windowIconPath
+  }
+
+  public setWindowName(name: string) {
+    this.component.instance.windowName = name
+  }
+
+  public setWindowIconPath(path: string) {
+    this.component.instance.windowIconPath = path
   }
 
   public unfocus(){
@@ -54,7 +81,7 @@ export class WindowEntry {
 
   public getDirectChildren(): HTMLCollection {
     // return this.componentRef.location.nativeElement.querySelectorAll(':scope > *')
-    return this.componentRef.location.nativeElement.children
+    return this.component.location.nativeElement.children
   }
 
   public setZIndex(index: number){

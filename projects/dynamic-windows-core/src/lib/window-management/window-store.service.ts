@@ -70,7 +70,7 @@ export class WindowStoreService {
   }
 
   public focus(w: WindowEntry){
-    this.focusWindow(w.componentRef.instance.id)
+    this.focusWindow(w.component.instance.id)
   }
 
   public focusWindow(id: number){
@@ -95,13 +95,13 @@ export class WindowStoreService {
       // @ts-ignore
       const entry = this.windowList.get(id);
       if (entry)
-        entry.componentRef.instance.resolveCloseWindowAction()
+        entry.component.instance.resolveCloseWindowAction()
       this.updateTaskbar();
     }
   }
 
   private removeEntry(id: number){
-    let index = this.focusStack.findIndex((w) => w.componentRef.instance.id == id)
+    let index = this.focusStack.findIndex((w) => w.hasId(id))
     if (index !== -1)
       this.focusStack.splice(index, 1)
 
@@ -123,8 +123,14 @@ export class WindowStoreService {
 
       this.removeEntry(id)
       this.windowList.delete(id);
+      this.focusFirst()
       this.updateTaskbar();
     }
+  }
+
+  public focusFirst(){
+    if (this.focusStack.length > 0)
+      this.focus(this.focusStack[0])
   }
 
   public getFocusedWindow(): WindowEntry | null{

@@ -12,7 +12,7 @@ export class WindowStoreService {
 
   currentlyFocusedEntry: WindowEntry | null = null;
   idCounter: number;
-  private taskBar!: any
+  private taskBar!: Taskbar
 
   windowContainerRef : ViewContainerRef | undefined;
   windowList:  Map<Number, WindowEntry>;

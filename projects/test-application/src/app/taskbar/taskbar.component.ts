@@ -9,9 +9,8 @@ import {WindowEntry} from "../../../../dynamic-windows-core/src/lib/window-manag
 })
 export class TaskbarComponent extends Taskbar implements OnInit{
 
-  constructor(private ws: WindowStoreService) {
+  constructor() {
     super();
-    this.ws.setTaskbar(this);
     this.updateTaskbar();
   }
 

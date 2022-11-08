@@ -1,7 +1,7 @@
 import {WindowStoreService} from "./window-management/window-store.service";
 import {WindowInjector} from "./dynamic-windows-core.module";
 
-export class DynamicWindow {
+export abstract class DynamicWindow {
 
   id: number = -1;
   w: WindowStoreService;

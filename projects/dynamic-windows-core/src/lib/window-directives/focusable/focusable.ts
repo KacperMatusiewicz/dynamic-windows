@@ -40,39 +40,7 @@ export class Focusable {
   }
 
   private changeFocus() {
-    if(this.windowsService.getFocusedWindow() !== null && !this.element.classList.contains('dw-focused')) {
-      this.unfocusCurrentlyFocusedWindow();
-    }
-    if(!this.element.classList.contains('dw-focused')) {
-      this.removeUnfocusedClass(this.element);
-      this.addFocusedClass(this.element);
-      this.element.style.zIndex = `${this.windowsService.getFocusNumber()}`;
-      this.windowsService.updateCurrentlyFocusedWindow(this.element);
-    }
-
-  }
-
-  private unfocusCurrentlyFocusedWindow() {
-    let focused = this.windowsService.getFocusedWindow();
-    if (focused !== null){
-      this.removeFocusedClass(focused);
-      this.addUnfocusedClass(focused);
-    }
-  }
-
-  private addFocusedClass(el: HTMLElement) {
-    el.classList.add("dw-focused");
-  }
-
-  private removeFocusedClass(el: HTMLElement) {
-    el.classList.remove('dw-focused');
-  }
-
-  private removeUnfocusedClass(el: HTMLElement) {
-    el.classList.remove('dw-not-focused');
-  }
-
-  private addUnfocusedClass(el: HTMLElement) {
-    el.classList.add("dw-not-focused");
+    if (this.id !== undefined)
+      this.windowsService.focusWindow(this.id);
   }
 }

@@ -1,5 +1,6 @@
-import {Component, ComponentRef, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Taskbar, WindowStoreService} from "dynamic-windows-core";
+import {WindowEntry} from "../../../../dynamic-windows-core/src/lib/window-management/window-entry";
 
 @Component({
   selector: 'app-taskbar',
@@ -18,15 +19,23 @@ export class TaskbarComponent extends Taskbar implements OnInit{
     this.entries = Array.from(this.ws.windowList.values());
   }
 
+  public getEntries(): WindowEntry[]{
+    return this.entries
+  }
+
   ngOnInit(): void {
   }
 
-  isThisFocused(item: ComponentRef<any>): boolean {
-    if (item.location.nativeElement.firstChild == this.ws.getFocusedWindow()){
+  isThisFocused(item: WindowEntry): boolean {
+    if (item == this.ws.getFocusedWindow()){
       this.updateTaskbar()
       return true;
     }
     this.updateTaskbar()
     return false;
+  }
+
+  focus(item: WindowEntry){
+    this.ws.focus(item)
   }
 }

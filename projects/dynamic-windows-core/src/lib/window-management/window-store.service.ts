@@ -2,6 +2,7 @@ import {ComponentRef, Injectable, Type, ViewContainerRef} from '@angular/core';
 import {DynamicWindow} from "../dynamic-window";
 import {WrappingWindow} from "./wrapping-window";
 import {Taskbar} from "../taskbar";
+import {WindowEntry} from "./window-entry";
 
 
 @Injectable({
@@ -9,18 +10,18 @@ import {Taskbar} from "../taskbar";
 })
 export class WindowStoreService {
 
-  currentlyFocusedHtmlElement: HTMLElement | null = null;
-  currentZIndex: number;
+  currentlyFocusedEntry: WindowEntry | null = null;
   idCounter: number;
   private taskBar!: any
 
   windowContainerRef : ViewContainerRef | undefined;
-  windowList:  Map<Number, ComponentRef<any>>;
+  windowList:  Map<Number, WindowEntry>;
+  focusStack: WindowEntry[]
 
   constructor() {
     this.windowList = new Map();
-    this.currentZIndex = 0;
     this.idCounter = 0;
+    this.focusStack = []
   }
 
   setWindowContainerRef(windowContainerRef: ViewContainerRef) {
@@ -34,11 +35,20 @@ export class WindowStoreService {
       componentRef = this.windowContainerRef?.createComponent(cls);
       componentRef.instance.setId(this.idCounter);
       this.windowContainerRef.element.nativeElement.appendChild(componentRef.location.nativeElement as HTMLElement);
-      this.windowList.set(this.idCounter++, componentRef);
+
+      let entry = new WindowEntry(componentRef);
+      this.windowList.set(this.idCounter++, entry);
+      this.addEntry(entry)
+
       this.updateTaskbar();
       return componentRef;
     }
     throw new DOMException();
+  }
+
+  private addEntry(entry: WindowEntry){
+    this.focusStack.unshift(entry)
+    this.updateZOrder()
   }
 
   createWindowFromHtmlElement<T extends WrappingWindow>(element: HTMLElement, wrapperComponent: Type<T> ) : ComponentRef<T> {
@@ -48,54 +58,77 @@ export class WindowStoreService {
         componentRef.instance.addHtmlElement(element);
         componentRef.instance.setId(this.idCounter);
         this.windowContainerRef.element.nativeElement.appendChild(componentRef.location.nativeElement as HTMLElement);
-        this.windowList.set(this.idCounter++, componentRef);
+
+        let entry = new WindowEntry(componentRef);
+        this.windowList.set(this.idCounter++, entry);
+        this.addEntry(entry)
+
         this.updateTaskbar();
         return componentRef;
       }
     throw new DOMException();
   }
 
+  public focus(w: WindowEntry){
+    this.focusWindow(w.componentRef.instance.id)
+  }
+
+  public focusWindow(id: number){
+    let window = this.windowList.get(id)
+    if (window !== undefined){
+      this.windowList.forEach((we, k) => {
+        if (k !== id)
+          we.unfocus()
+      })
+
+      this.removeEntry(id)
+      this.addEntry(window)
+      window.focus();
+      this.currentlyFocusedEntry = window
+      if (this.taskBar)
+        this.updateTaskbar()
+    }
+  }
 
   closeWindow(id: number): void {
     if (this.windowList.has(id)){
       // @ts-ignore
-      const componentRef: ComponentRef<any> = this.windowList.get(id);
-      componentRef.instance.resolveCloseWindowAction();
+      const entry = this.windowList.get(id);
+      if (entry)
+        entry.componentRef.instance.resolveCloseWindowAction()
       this.updateTaskbar();
     }
+  }
 
+  private removeEntry(id: number){
+    let index = this.focusStack.findIndex((w) => w.componentRef.instance.id == id)
+    if (index !== -1)
+      this.focusStack.splice(index, 1)
+
+  }
+
+  private updateZOrder(){
+    let z = this.focusStack.length+1
+    this.focusStack.forEach((w)=>{
+      w.setZIndex(z)
+      z--
+    })
   }
 
   terminate(id: number) : void {
     if (this.windowList.has(id)) {
-      // @ts-ignore
-      const componentRef: ComponentRef<any> = this.windowList.get(id);
-      this.clearFocusWhileClosing(componentRef);
+      const entry = this.windowList.get(id);
+      if (entry)
+        entry.delete()
 
-      componentRef.location.nativeElement.remove();
+      this.removeEntry(id)
       this.windowList.delete(id);
       this.updateTaskbar();
     }
   }
 
-  clearFocusWhileClosing(componentRef: ComponentRef<any>) {
-    const el: HTMLElement = componentRef.location.nativeElement as HTMLElement;
-    if (el.getElementsByClassName("dw-focusable").item(0) === this.currentlyFocusedHtmlElement) {
-      this.currentlyFocusedHtmlElement = null;
-      this.updateTaskbar();
-    }
-  }
-  public getFocusNumber() : number {
-    return ++this.currentZIndex;
-  }
-
-  public getFocusedWindow(): HTMLElement | null{
-
-    return this.currentlyFocusedHtmlElement
-  }
-
-  public updateCurrentlyFocusedWindow(element: HTMLElement) {
-    this.currentlyFocusedHtmlElement = element;
+  public getFocusedWindow(): WindowEntry | null{
+    return this.currentlyFocusedEntry
   }
 
   private updateTaskbar(){

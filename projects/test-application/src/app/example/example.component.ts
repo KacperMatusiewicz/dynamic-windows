@@ -31,7 +31,6 @@ export class ExampleComponent extends DynamicWindow implements OnInit {
   }
 
   public updateTitle($event: KeyboardEvent){
-    console.log($event)
     this.windowName = this.inputField.nativeElement.value
   }
 

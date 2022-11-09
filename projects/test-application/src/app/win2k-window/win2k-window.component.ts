@@ -21,17 +21,16 @@ export class Win2kWindowComponent extends DynamicWindow implements OnInit {
 
   public override minimize(){
     setTimeout(()=> super.minimize(), 200)
-    this.box.nativeElement.style.transition = 'transform 0.2s ease-in 0s'
+    this.box.nativeElement.style.transition = 'transform 0.2s ease-in 0s, opacity 0.2s ease-in-out 0s'
     this.box.nativeElement.style.transform  = 'translateY(90vh) scale(0.01)'
+    this.box.nativeElement.style.opacity = '0'
   }
 
   public override restore(){
-    setTimeout(()=> {
-      super.restore()
-      this.box.nativeElement.style.transition = ''
-      this.box.nativeElement.style.transform  = ''
-    }, 200)
-    this.box.nativeElement.style.transform  = 'translateY(0) scale(1)'
+    this.box.nativeElement.style.transition = ''
+    this.box.nativeElement.style.transform  = ''
+    this.box.nativeElement.style.opacity = ''
+    super.restore()
   }
 
   ngOnInit(): void {

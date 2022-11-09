@@ -256,5 +256,5 @@
   padding: 2px;
   font-family: Tahoma;
   font-size: 12px;
-  overflow: scroll;
+  overflow: hidden scroll;
 }

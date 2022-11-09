@@ -19,6 +19,7 @@ export abstract class DynamicWindow {
     if (this.id !== undefined)
     this.w.closeWindow(this.id);
   }
+
   public resolveCloseWindowAction(): void {
     if (this.id != null) {
       this.w.terminate(this.id);

@@ -1,5 +1,4 @@
 import {ComponentRef} from "@angular/core";
-import {Element} from "@angular/compiler";
 
 export class WindowEntry {
   public component: ComponentRef<any>
@@ -50,7 +49,7 @@ export class WindowEntry {
     this.addFocusedClass()
   }
 
-  public isFocusable(element: Node): boolean {
+  private isFocusable(element: Node): boolean {
     let el = element as HTMLElement
     if (el.classList.contains('dw-focusable'))
       return true

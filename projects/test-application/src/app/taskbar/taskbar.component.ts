@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Taskbar} from "dynamic-windows-core";
-import {WindowEntry} from "../../../../dynamic-windows-core/src/lib/window-management/window-entry";
+import {Taskbar, WindowEntry} from "dynamic-windows-core";
+
 
 @Component({
   selector: 'app-taskbar',

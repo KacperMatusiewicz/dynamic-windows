@@ -90,13 +90,49 @@ export class WindowStoreService {
     }
   }
 
-  closeWindow(id: number): void {
+  public closeWindow(id: number): void {
     if (this.windowList.has(id)){
-      // @ts-ignore
       const entry = this.windowList.get(id);
       if (entry)
-        entry.component.instance.resolveCloseWindowAction()
+        entry.getInstance().resolveCloseWindowAction()
       this.updateTaskbar();
+    }
+  }
+
+  public terminate(id: number) : void {
+    if (this.windowList.has(id)) {
+      const entry = this.windowList.get(id)
+      if (entry)
+        entry.delete()
+
+      this.removeEntry(id)
+      this.windowList.delete(id)
+      this.focusFirst()
+      this.updateTaskbar()
+    }
+  }
+
+  public minimizeWindow(id: number){
+    if(this.windowList.has(id)){
+      const window = this.windowList.get(id)
+      if (window){
+        window.minimize()
+        if (window === this.getFocusedWindow())
+          this.currentlyFocusedEntry = null
+      }
+
+      this.updateTaskbar()
+    }
+  }
+
+  public restoreWindow(id: number){
+    if(this.windowList.has(id)){
+      const window = this.windowList.get(id)
+      if (window){
+        window.restore()
+      }
+
+      this.updateTaskbar()
     }
   }
 
@@ -115,22 +151,19 @@ export class WindowStoreService {
     })
   }
 
-  terminate(id: number) : void {
-    if (this.windowList.has(id)) {
-      const entry = this.windowList.get(id);
-      if (entry)
-        entry.delete()
-
-      this.removeEntry(id)
-      this.windowList.delete(id);
-      this.focusFirst()
-      this.updateTaskbar();
-    }
-  }
-
   public focusFirst(){
-    if (this.focusStack.length > 0)
-      this.focus(this.focusStack[0])
+    let validId = -1
+    if (this.focusStack.length > 0){
+      for (let i=0; i<this.focusStack.length; i++){
+        let entry = this.focusStack[i]
+        if (!entry.isMinimized()){
+          validId = this.focusStack[i].getId()
+        }
+      }
+
+      if (validId !== -1)
+        this.focus(this.focusStack[validId])
+    }
   }
 
   public getFocusedWindow(): WindowEntry | null{

@@ -1,4 +1,4 @@
-<div dw-windowframe class="wrapper w2k-border">
+<div #box dw-windowframe class="wrapper w2k-border">
   <div class="inner w2k-border-inner">
     <div dw-draggable-space class="bar">
       <div class="window-info">
@@ -6,7 +6,7 @@
         <div class="w2k-window-title">{{windowName}}</div>
       </div>
       <ul dw-non-draggable-space="recursive-child" class="buttons">
-        <li class="button w2k-box-border">
+        <li (click)="minimize()" class="button w2k-box-border">
           <div class="button-inner">
             <div class="w2k-button-icon minimize-icon"></div>
           </div>

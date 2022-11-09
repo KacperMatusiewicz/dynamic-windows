@@ -2,6 +2,7 @@ import {ComponentRef} from "@angular/core";
 
 export class WindowEntry {
   public component: ComponentRef<any>
+  private minimized: boolean = false
 
 
   constructor(componentRef: ComponentRef<any>) {
@@ -17,6 +18,28 @@ export class WindowEntry {
       return true
 
     return false
+  }
+
+  public isMinimized(): boolean{
+    return this.minimized
+  }
+
+  public minimize(){
+    this.minimized = true
+    let elements = this.getDirectChildren();
+    for (let i=0; i<elements.length; i++){
+      let el = (elements[i] as HTMLElement)
+      el.style.display = 'none'
+    }
+  }
+
+  public restore(){
+    this.minimized = false
+    let elements = this.getDirectChildren();
+    for (let i=0; i<elements.length; i++){
+      let el = (elements[i] as HTMLElement)
+      el.style.display = ''
+    }
   }
 
   public delete(){
@@ -45,6 +68,7 @@ export class WindowEntry {
   }
 
   public focus(){
+    this.restore()
     this.removeNotFocusedClass()
     this.addFocusedClass()
   }
@@ -98,6 +122,10 @@ export class WindowEntry {
         if (elements[i].classList.contains('dw-not-focused'))
           elements[i].classList.remove('dw-not-focused')
     }
+  }
+
+  public getInstance(){
+    return this.component.instance
   }
 
   public getDirectChildren(): HTMLCollection {

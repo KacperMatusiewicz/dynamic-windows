@@ -17,6 +17,7 @@ export class TaskbarComponent extends Taskbar implements OnInit{
   }
 
   public focus(item: WindowEntry){
+    item.getInstance().restore()
     this.ws.focus(item)
   }
 }

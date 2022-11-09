@@ -1,7 +1,7 @@
 <div dw-windowframe #wrapper class="window">
 
   <ul dw-non-draggable-space="recursive-child" class="window-buttons">
-    <li class="window-button button-minimize"></li>
+    <li class="window-button button-minimize" (click)="minimize()"></li>
     <li class="window-button button-close" (click)="closeWindow()"></li>
   </ul>
 

@@ -15,6 +15,15 @@ export abstract class DynamicWindow {
     this.id = id;
   }
 
+  public minimize(): void{
+    this.w.minimizeWindow(this.id)
+  }
+
+  public restore(): void{
+    this.w.restoreWindow(this.id)
+  }
+
+
   public closeWindow(): void {
     if (this.id !== undefined)
     this.w.closeWindow(this.id);

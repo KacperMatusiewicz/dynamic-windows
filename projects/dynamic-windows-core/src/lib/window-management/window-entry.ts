@@ -1,4 +1,4 @@
-import {ComponentRef} from "@angular/core";
+import {ComponentRef, ElementRef} from "@angular/core";
 
 export class WindowEntry {
   public component: ComponentRef<any>
@@ -7,6 +7,14 @@ export class WindowEntry {
 
   constructor(componentRef: ComponentRef<any>) {
     this.component = componentRef;
+  }
+
+  public setPosition(x: number, y: number){
+
+  }
+
+  public setSize(x: number, y: number){
+
   }
 
   public getId(): number{
@@ -26,20 +34,20 @@ export class WindowEntry {
 
   public minimize(){
     this.minimized = true
-    let elements = this.getDirectChildren();
-    for (let i=0; i<elements.length; i++){
-      let el = (elements[i] as HTMLElement)
-      el.style.display = 'none'
-    }
+    let element = this.getWindow()
+    element.style.display = 'none'
   }
 
   public restore(){
     this.minimized = false
-    let elements = this.getDirectChildren();
-    for (let i=0; i<elements.length; i++){
-      let el = (elements[i] as HTMLElement)
-      el.style.display = ''
-    }
+    let element = this.getWindow()
+    element.style.display = ''
+  }
+
+  public getWindow(): HTMLElement {
+    if (this.component.location.nativeElement.children.length > 1)
+      console.error("There can be only one root element in window declaration.")
+    return this.component.location.nativeElement.firstChild
   }
 
   public delete(){
@@ -82,61 +90,45 @@ export class WindowEntry {
   }
 
   public isEntryFocusable(): boolean {
-    let elements = this.getDirectChildren()
-    for(let i=0; i<elements.length; i++)
-      if (this.isFocusable(elements[i]))
-        return true
+    let element = this.getWindow()
+    if (this.isFocusable(element))
+      return true
 
     return false
   }
 
   public addFocusedClass(){
-    let elements = this.getDirectChildren()
-    for(let i=0; i<elements.length; i++){
-      if (this.isFocusable(elements[i]))
-        elements[i].classList.add('dw-focused')
-    }
+    let element = this.getWindow()
+    if (this.isFocusable(element))
+      element.classList.add('dw-focused')
   }
 
   public addNotFocusedClass() {
-    let elements = this.getDirectChildren()
-    for(let i=0; i<elements.length; i++){
-      if (this.isFocusable(elements[i]))
-        elements[i].classList.add('dw-not-focused')
-    }
+    let element = this.getWindow()
+    if (this.isFocusable(element))
+      element.classList.add('dw-not-focused')
   }
 
   public removeFocusedClass(){
-    let elements = this.getDirectChildren()
-    for(let i=0; i<elements.length; i++){
-      if (this.isFocusable(elements[i]))
-        if (elements[i].classList.contains('dw-focused'))
-          elements[i].classList.remove('dw-focused')
-    }
+    let element = this.getWindow()
+    if (this.isFocusable(element))
+      if (element.classList.contains('dw-focused'))
+        element.classList.remove('dw-focused')
   }
 
   public removeNotFocusedClass() {
-    let elements = this.getDirectChildren()
-    for(let i=0; i<elements.length; i++){
-      if (this.isFocusable(elements[i]))
-        if (elements[i].classList.contains('dw-not-focused'))
-          elements[i].classList.remove('dw-not-focused')
-    }
+    let element = this.getWindow()
+    if (this.isFocusable(element))
+      if (element.classList.contains('dw-not-focused'))
+        element.classList.remove('dw-not-focused')
   }
 
   public getInstance(){
     return this.component.instance
   }
 
-  public getDirectChildren(): HTMLCollection {
-    // return this.componentRef.location.nativeElement.querySelectorAll(':scope > *')
-    return this.component.location.nativeElement.children
-  }
-
   public setZIndex(index: number){
-    let elements = this.getDirectChildren()
-    for(let i=0; i<elements.length; i++){
-      (elements[i] as HTMLElement).style.zIndex = `${index}`
-    }
+    let element = this.getWindow()
+    element.style.zIndex = `${index}`
   }
 }

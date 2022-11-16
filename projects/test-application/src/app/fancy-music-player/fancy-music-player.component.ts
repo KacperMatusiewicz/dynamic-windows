@@ -102,18 +102,6 @@ export class FancyMusicPlayerComponent extends DynamicWindow implements OnInit, 
       ]);
   }
 
-  @ViewOperation()
-  public setSize(width: number, height: number){
-    (this.wrapper.nativeElement as HTMLElement).style.width  = `${width}px`;
-    (this.wrapper.nativeElement as HTMLElement).style.height = `${height}px`;
-  }
-
-  @ViewOperation()
-  public setPosition(x: number, y: number){
-    (this.wrapper.nativeElement as HTMLElement).style.left = `${x}px`;
-    (this.wrapper.nativeElement as HTMLElement).style.top  = `${y}px`;
-  }
-
   ngAfterViewInit(): void {
     let observer = new ResizeObserver(() =>{
       let size = Number.parseInt((this.wrapper.nativeElement.style.width as string).replace("px",""));

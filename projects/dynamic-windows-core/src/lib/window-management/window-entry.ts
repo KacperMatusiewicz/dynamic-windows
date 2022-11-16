@@ -1,20 +1,46 @@
 import {ComponentRef, ElementRef} from "@angular/core";
+import {WindowState} from "./window-state";
 
 export class WindowEntry {
+  private floatingState: WindowState
   public component: ComponentRef<any>
   private minimized: boolean = false
+  private maximized: boolean = false
 
 
   constructor(componentRef: ComponentRef<any>) {
     this.component = componentRef;
+    this.floatingState = this.getCurrentState()
+  }
+
+  public getCurrentState(): WindowState{
+    let window = this.getWindow()
+    let x = Number.parseInt(getComputedStyle(window).left)
+    let y = Number.parseInt(getComputedStyle(window).top)
+    let w = Number.parseInt(getComputedStyle(window).width)
+    let h = Number.parseInt(getComputedStyle(window).height)
+    return new WindowState(x,y,w,h)
+  }
+
+  public saveCurrentFloatingState(){
+    this.floatingState = this.getCurrentState()
+  }
+
+  public restoreSizeFromState(state: WindowState){
+    this.setPosition(state.getX(), state.getY())
+    this.setSize(state.getW(), state.getH())
   }
 
   public setPosition(x: number, y: number){
-
+    let element = this.getWindow()
+    element.style.left = `${x}px`
+    element.style.top  = `${y}px`
   }
 
   public setSize(x: number, y: number){
-
+    let element = this.getWindow()
+    element.style.width  = `${x}px`
+    element.style.height = `${y}px`
   }
 
   public getId(): number{
@@ -30,6 +56,10 @@ export class WindowEntry {
 
   public isMinimized(): boolean{
     return this.minimized
+  }
+
+  public isMaximized(): boolean{
+    return this.maximized
   }
 
   public minimize(){
@@ -81,6 +111,18 @@ export class WindowEntry {
     this.addFocusedClass()
   }
 
+  public maximize(){
+    this.maximized = true
+    this.saveCurrentFloatingState()
+    this.addMaximizedClass()
+  }
+
+  public unMaximize(){
+    this.maximized = false
+    this.restoreSizeFromState(this.floatingState)
+    this.removeMaximizedClass()
+  }
+
   private isFocusable(element: Node): boolean {
     let el = element as HTMLElement
     if (el.classList.contains('dw-focusable'))
@@ -95,6 +137,16 @@ export class WindowEntry {
       return true
 
     return false
+  }
+
+  public addMaximizedClass(){
+    let element = this.getWindow()
+    element.classList.add('dw-maximized')
+  }
+
+  public removeMaximizedClass() {
+    let element = this.getWindow()
+    element.classList.remove('dw-maximized')
   }
 
   public addFocusedClass(){

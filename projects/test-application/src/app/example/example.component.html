@@ -3,8 +3,8 @@
     <div dw-draggable-space class="titlebar">
       <div class="window-title">My example text editor</div>
       <ul dw-non-draggable-space="recursive-child" class="window-buttons">
-        <li class="window-button button-minimize"></li>
-        <li class="window-button button-maximize"></li>
+        <li (click)="minimize()" class="window-button button-minimize"></li>
+        <li (click)="toggleMaximize()" class="window-button button-maximize"></li>
         <li (click)="resolveCloseWindowAction()" class="window-button button-close"></li>
       </ul>
 

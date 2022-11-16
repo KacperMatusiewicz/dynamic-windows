@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {DynamicWindow} from "dynamic-windows-core";
+import {DynamicWindow, ViewOperation} from "dynamic-windows-core";
 
 @Component({
   selector: 'app-win2k-window',
@@ -35,5 +35,4 @@ export class Win2kWindowComponent extends DynamicWindow implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

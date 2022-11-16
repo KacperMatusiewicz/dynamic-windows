@@ -51,6 +51,14 @@ export class WindowStoreService {
     this.updateZOrder()
   }
 
+  public getDisplayWidth(): number{
+    return Number.parseInt(getComputedStyle(this.windowContainerRef?.element.nativeElement).width)
+  }
+
+  public getDisplayHeight(): number{
+    return Number.parseInt(getComputedStyle(this.windowContainerRef?.element.nativeElement).height)
+  }
+
   createWindowFromHtmlElement<T extends WrappingWindow>(element: HTMLElement, wrapperComponent: Type<T> ) : ComponentRef<T> {
     let componentRef: ComponentRef<any>;
       if(this.windowContainerRef !== undefined){
@@ -109,6 +117,24 @@ export class WindowStoreService {
       this.windowList.delete(id)
       this.focusFirst()
       this.updateTaskbar()
+    }
+  }
+
+  public setSize(id: number, x: number, y: number){
+    if (this.windowList.has(id)){
+      const window = this.windowList.get(id)
+      if (window){
+        window.setSize(x,y)
+      }
+    }
+  }
+
+  public setPosition(id: number, x: number, y: number){
+    if (this.windowList.has(id)){
+      const window = this.windowList.get(id)
+      if (window){
+        window.setPosition(x,y)
+      }
     }
   }
 

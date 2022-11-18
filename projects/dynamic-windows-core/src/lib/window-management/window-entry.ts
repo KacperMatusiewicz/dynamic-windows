@@ -1,4 +1,4 @@
-import {ComponentRef, ElementRef} from "@angular/core";
+import {ComponentRef} from "@angular/core";
 import {WindowState} from "./window-state";
 
 export class WindowEntry {
@@ -10,6 +10,7 @@ export class WindowEntry {
 
   constructor(componentRef: ComponentRef<any>) {
     this.component = componentRef;
+    this.getWindow().setAttribute("dw-windowid", this.getId().toString())
     this.floatingState = this.getCurrentState()
   }
 

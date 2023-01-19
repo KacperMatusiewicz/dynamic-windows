@@ -44,7 +44,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "github-pages",
+            "outputPath": "docs",
             "index": "projects/test-application/src/index.html",
             "main": "projects/test-application/src/main.ts",
             "polyfills": "projects/test-application/src/polyfills.ts",

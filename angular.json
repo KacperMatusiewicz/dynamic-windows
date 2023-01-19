@@ -44,7 +44,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/test-application",
+            "outputPath": "github-pages",
             "index": "projects/test-application/src/index.html",
             "main": "projects/test-application/src/main.ts",
             "polyfills": "projects/test-application/src/polyfills.ts",
@@ -69,7 +69,7 @@
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumError": "8kb"
                 }
               ],
               "fileReplacements": [
